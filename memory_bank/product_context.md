@@ -2,7 +2,7 @@
 
 ## 1. Project Overview
 
-**Zephyr is a responsive, multi-page drone e-commerce prototype** created by a two-person development team for a consulting-firm client as part of a 4Geeks Academy project.
+**Zephyr is a responsive, multi-page drone e-commerce prototype** commissioned by Zephyr and being developed under contract by a six-person web development team. The team is responsible for delivering a cohesive, review-ready storefront prototype that meets Zephyr’s requirements and quality standards.
 
 The project takes DJI's existing drone shopping experience as a **reference for product categories, page structure, and shopping journeys**, then proposes a clearer, more modern, easier-to-navigate refresh under the **Zephyr** name. The goal is not to clone DJI's website or imply an official affiliation; it is to demonstrate thoughtful improvements in information hierarchy, discoverability, product comparison, responsiveness, and checkout clarity.
 
@@ -17,7 +17,7 @@ The deliverable is a **visual and navigable prototype**, not a production e-comm
 - Present Zephyr as a polished and trustworthy drone storefront.
 - Improve on the reference site's usability through clear navigation, readable information, and well-organized product cards.
 - Help visitors discover drones, browse by relevant attributes, and understand product capabilities.
-- Demonstrate an understandable journey from the home page to catalog, product details, cart, and checkout.
+- Demonstrate an understandable journey from the home page to catalog, product details, cart, and checkout, with an accessible Support destination.
 - Deliver a consistent experience on mobile, tablet, laptop, and desktop.
 - Use semantic HTML, inclusive accessibility practices, and SEO-friendly, indexable content.
 - Include accurate Schema.org structured data when appropriate.
@@ -37,7 +37,7 @@ These audience groups inform the prototype's content and design; no user account
 
 ## 3. Scope and Required Deliverables
 
-At minimum, provide these five linked HTML pages:
+Provide these six linked HTML pages:
 
 | View | File | Purpose |
 | --- | --- | --- |
@@ -46,6 +46,7 @@ At minimum, provide these five linked HTML pages:
 | Product details | `product.html` | Show one drone or accessory with essential purchasing information. |
 | Cart | `cart.html` | Display three sample items and a purchase summary. |
 | Checkout | `checkout.html` | Present a three-step checkout flow as a visual prototype. |
+| Support | `support.html` | Show a contact support form and short FAQ section. |
 
 Include `product_context.md`, the existing separate style guide, a shared Tailwind stylesheet or Tailwind setup appropriate to the team's environment, and locally stored assets when practical.
 
@@ -58,13 +59,14 @@ Suggested repository organization (adapt to the existing repo rather than creati
 ├── product.html
 ├── cart.html
 ├── checkout.html
+├── support.html
 ├── product_context.md
 ├── assets/
 │   └── images/
 └── ... shared Tailwind source/output and existing style guide
 ```
 
-**All navigation must work with ordinary relative HTML links.** The five HTML files must be reachable from each other through appropriate navigation links or calls to action. Avoid dead-end pages.
+**All navigation must work with ordinary relative HTML links.** The six HTML files must be reachable from each other through appropriate navigation links or calls to action. Avoid dead-end pages.
 
 ### Product data ownership (separate source of truth)
 
@@ -73,12 +75,12 @@ Suggested repository organization (adapt to the existing repo rather than creati
 - Do not add product names, models, prices, descriptions, technical specifications, product images/paths, inventory status, or fabricated sample records to `product_context.md`.
 - Do not create a competing dataset, duplicate the separate data file, or silently replace missing entries with invented values.
 - Use product information from the separate file consistently across home cards, catalog cards, product details, cart examples, and any product-related Schema.org markup.
-- The assignment’s **20 catalog cards** and **three cart line items** are layout requirements, not data definitions. Populate them from the separate file when sufficient records are available; otherwise flag the gap to the team without fabricating product content.
+- The **20 catalog cards** and **three cart line items** are client-approved layout requirements, not data definitions. Populate them from the separate file when sufficient records are available; otherwise flag the gap to the team without fabricating product content.
 - If data-file location, field names, or values are unclear, inspect the repository and existing team documentation. Treat the separate file as authoritative and leave it unchanged unless explicitly asked to modify it.
 
 ### Shared page elements
 
-The header/navigation and footer must look and behave consistently on **every** view. Because this is an HTML-only prototype, shared components can be repeated as consistent HTML markup across files; do not introduce a templating engine, React components, or JavaScript solely to implement reuse. Keep the repeated markup synchronized during code review.
+The header/navigation and footer must look and behave consistently on **every** view, including Support. Provide a working route to `support.html` in the shared navbar or footer. Because this is an HTML-only prototype, shared components can be repeated as consistent HTML markup across files; do not introduce a templating engine, React components, or JavaScript solely to implement reuse. Keep the repeated markup synchronized during code review.
 
 ---
 
@@ -104,98 +106,239 @@ Use DJI's current public storefront as **inspiration**, not as code to copy. Ret
 
 ## 5. Required View: Home (`index.html`)
 
-### Header / navigation
+### Required structure
 
-- Zephyr logo/brand mark, linking to `index.html`.
-- Visible product search field or search affordance.
-- User account menu/link affordance.
-- Accessible navigation links to relevant product categories/catalog and the cart.
-- Mobile-friendly presentation that avoids overflow and keeps critical destinations reachable.
+- Reuse the shared navbar and footer defined in Section 3.
+- Include a primary page heading and a prominent **hero** highlighting a Zephyr campaign, product, or brand message.
+- Include two distinct horizontal product-card sections: **New Arrivals** and **Best Sellers**.
+- Each product card should display an image, a name, useful brief context, price when available, and a link to `product.html`.
+- Source all product content from the separate product-data file, not this document.
 
-As there is no JavaScript or back end, search and account features are **visual affordances only**, unless they can be implemented meaningfully with plain HTML. Do not promise real search results or authentication.
+### Page-specific components and behavior
 
-### Main content
+- Hero call to action must link to a relevant working page such as `catalog.html` or `product.html`.
+- Horizontal product sections may use native scrolling or responsive wrapping; do not introduce JavaScript carousels.
+- Search and account affordances are visual only unless genuinely usable with static HTML. Do not imply that account or search services exist.
 
-- **Hero section:** prominent campaign, highlighted drone, or brand message, with a clear link to catalog or the featured product.
-- **New Arrivals:** horizontal set of product cards; on mobile, cards should remain readable and be accessible via a simple responsive layout or native horizontal scrolling.
-- **Best Sellers:** second horizontal product-card section with the same core card design.
-- Product cards should have an image, descriptive name, useful short detail, price where available, and a clear link to `product.html` (the prototype's sample product page).
+### Responsive design
 
-### Footer
+- Keep the hero readable and appropriately sized on mobile, tablet, and desktop.
+- Maintain usable card widths and avoid page-level horizontal overflow.
+- Preserve accessible navigation and calls to action at every breakpoint.
 
-- **Categories:** drones, camera drones, accessories, and other relevant Zephyr product categories.
-- **Legal:** terms and conditions, privacy policy, and about Zephyr.
-- **Contact:** suitable contact details or a clearly labeled placeholder, without inventing live support channels.
+### Accessibility and semantic HTML
 
-Do not leave decorative links pointing to `#` as though they are functional. Where a legal/account destination is outside the five required pages, label it as nonfunctional prototype content or provide a meaningful alternative; do not create extra pages unless the team agrees.
+- Use a meaningful `<h1>` for the page, `<section>` headings for product groups, and `<article>` where suitable for individual product cards.
+- Ensure hero text is real HTML text rather than embedded solely in an image.
+- Provide descriptive links, image alternatives, and visible focus states.
+
+### Definition of done
+
+- [ ] Hero and working call to action are present.
+- [ ] New Arrivals and Best Sellers each show coherent product cards from the separate data file.
+- [ ] Shared navbar and footer are present, including a link to Support.
+- [ ] Layout is responsive and keyboard accessible.
+- [ ] No simulated search/account behavior is misrepresented as live functionality.
 
 ---
 
 ## 6. Required View: Catalog (`catalog.html`)
 
-- Reuse the common header and footer.
-- Provide a visible **filter bar before the product grid**.
-- Include category and size filtering controls as the assignment requires. Since drones are not clothing, interpret **size** as a clearly explained drone size class (for example: compact, medium, large); do not use apparel sizes.
-- Organize a **reference set of 20 visible products**, arranged **four columns by five rows on desktop**.
-- Adapt the grid to fewer columns on tablet and mobile (for example, two and one columns respectively) without horizontal page overflow.
-- Each product card includes a thumbnail, product name, concise attributes, price when specified, and a link to `product.html`.
-- Use only categories defined in the separate product-data file; do not invent categories to fill the grid.
+### Required structure
 
-**Static-only limitation:** Native HTML select controls may demonstrate the filter interface, but **they must not be described as functioning product filters** unless the team develops an HTML-only, genuinely usable alternative. No client-side product filtering with JavaScript is permitted. A static prototype with visually complete controls meets the demonstration intent; clearly document this behavior.
+- Reuse the shared navbar and footer.
+- Place a filter bar **before** the product grid, including **category** and **size** controls.
+- Display **20 product cards** as a **4-column × 5-row grid on desktop**, when the data file has sufficient records.
+- Product cards should include image, name, concise relevant information, price when available, and a link to `product.html`.
+
+### Page-specific components and behavior
+
+- Treat **size** as a drone size class, rather than apparel sizing; use only categories and attributes supported by the separate data file.
+- Native `<select>` elements can illustrate filtering, but without JavaScript or server processing they **do not dynamically filter products**. Clearly identify static controls as prototype-only.
+- Do not manufacture products or categories to fill the grid. If fewer than 20 valid records exist, flag the data gap for the team.
+
+### Responsive design
+
+- Use a responsive grid, with fewer columns at tablet and mobile widths; aim for four columns on desktop.
+- Avoid cropped text, oversized images, or page-level horizontal overflow.
+- Keep filter controls readable and easy to operate on small screens.
+
+### Accessibility and semantic HTML
+
+- Use a meaningful `<h1>`, a labeled filter `<form>` or grouping, and semantic product-card content.
+- Associate labels with filter controls and ensure meaningful image alternatives.
+- Use actual anchors for product navigation and retain visible keyboard focus indicators.
+
+### Definition of done
+
+- [ ] Category and size-class controls appear above the product grid.
+- [ ] Up to 20 data-backed product cards appear in a 4×5 desktop reference layout.
+- [ ] Every product card links to the prototype product-details page.
+- [ ] Filter limitations are disclosed rather than described as functioning dynamically.
+- [ ] Responsive behavior, semantic markup, and keyboard access are verified.
 
 ---
 
 ## 7. Required View: Product Details (`product.html`)
 
-- Reuse the common header and footer.
-- Desktop layout: **two main columns** — left product image occupying approximately half of the content width; right product details and purchase controls.
-- Mobile layout: stack image above details with good spacing and readable typography.
-- Display product **name, code/reference, size class, price, quantity selector, and “Add to cart” button**.
-- Provide an additional **detailed description** below the main product area, covering materials/build characteristics and recommended scenarios or use cases.
-- Show relevant product characteristics and use cases only when supported by the separate product-data file.
-- Label the product image accessibly and use a meaningful page heading.
+### Required structure
 
-**Static-only limitation:** Quantity controls may be native HTML inputs. “Add to cart” may navigate to the populated sample `cart.html` as a **demonstration** of the intended flow; it does **not** actually store a selected item or quantity. The UI and documentation must not claim persistent cart state.
+- Reuse the shared navbar and footer.
+- Create a **two-column desktop layout**, with product imagery occupying roughly half of the available width on the left and product details on the right.
+- Display **name, code/reference, size, price, quantity selector, and Add to cart** action.
+- Include a detailed description section below the primary layout covering **materials/build** and **recommended uses or wearing-equivalent use cases** relevant to a drone or accessory.
+- All product fields must come from the separate product-data file; do not define records here.
+
+### Page-specific components and behavior
+
+- Use native HTML quantity input controls where appropriate.
+- The Add to cart action may link to `cart.html` to demonstrate the shopping journey; it does **not** actually save the chosen product or quantity.
+- Display only descriptions, material details, and use scenarios supported by the separate data file; flag absent fields rather than fabricating them.
+
+### Responsive design
+
+- Stack imagery before details on small screens and use two columns on wider screens.
+- Keep the quantity field, price, and Add to cart action visible and usable without clipping.
+- Scale imagery naturally while preserving its aspect ratio.
+
+### Accessibility and semantic HTML
+
+- Use the product name as the main `<h1>` and appropriate section headings for details.
+- Provide informative image `alt` text and an explicit label for quantity.
+- Use links for actual page navigation; do not imply that a cart-state update occurs.
+
+### Definition of done
+
+- [ ] Desktop two-column and mobile stacked layouts are present.
+- [ ] Required product fields and quantity selector are visible.
+- [ ] Add to cart leads to the sample cart and is described honestly as a prototype action.
+- [ ] Description includes data-backed materials/build and use scenarios where available.
+- [ ] Shared navigation, semantic structure, and keyboard accessibility are verified.
 
 ---
 
 ## 8. Required View: Cart (`cart.html`)
 
-- Show a **full-page cart** rather than a slide-out drawer.
-- Reuse the common header and footer.
-- Show **three distinct example cart items** selected from the separate product-data file so reviewers can assess the layout; do not define those items here.
-- For each cart line, show a product thumbnail, product name/reference, unit price, displayed quantity, and line total.
-- Include a clearly separated order summary showing **subtotal, tax, and total**.
-- Provide an obvious **“Purchase”** action linking to `checkout.html`.
-- Totals must be **arithmetically consistent** with the values selected from the separate product-data file, the demonstrated quantities, and the displayed tax method. If tax is illustrative, label the rate/amount as an estimate and avoid pretending it is a live tax quote.
-- On small screens, stack cart rows and move the summary underneath or alongside when space permits.
+### Required structure
 
-**Static-only limitation:** Cart contents and totals are illustrative prototype displays, populated using the separate product-data source. Without JavaScript or a back end, changing an input does not recompute totals or update stored cart contents; avoid misleading interactive affordances. If an editable quantity field is shown to satisfy layout expectations, label its prototype status.
+- Reuse the shared navbar and footer.
+- Implement a **full-page cart**, not a drawer or side panel.
+- Show **three example line items** from the separate product-data file, if available.
+- Each item must show a **thumbnail, product identity, unit price, quantity, and line total**.
+- Include an order summary with **subtotal, tax, total**, and a **Purchase** action linking to `checkout.html`.
+
+### Page-specific components and behavior
+
+- Calculate displayed line totals and summary values consistently using the selected source data and illustrated quantities.
+- Label estimated tax clearly; do not imply a live tax calculation or jurisdiction-specific accuracy.
+- Because this is HTML-only, edits to quantity cannot persist or automatically recalculate totals. Display quantities as illustrative values or clearly label any editable inputs as demo-only.
+- If there are insufficient records for three distinct items, report the gap instead of inventing item data.
+
+### Responsive design
+
+- Allow cart rows to stack or reflow while retaining clear labels for price, quantity, and totals.
+- Position the summary beside items on roomy screens and below them on narrow screens.
+- Avoid cramped layouts or off-screen actions.
+
+### Accessibility and semantic HTML
+
+- Use a main heading, meaningful item groupings, and clear order-summary labels.
+- Give meaningful image alternatives and ensure the Purchase link is keyboard accessible.
+- Do not rely solely on visual position or color to communicate totals.
+
+### Definition of done
+
+- [ ] Full-page cart shows three data-backed demonstration products, subject to source availability.
+- [ ] Each line displays image, unit price, quantity, and line total.
+- [ ] Summary displays arithmetically consistent subtotal, estimated tax, and total.
+- [ ] Purchase link opens `checkout.html`.
+- [ ] Responsive layout and static-cart disclosure are present.
 
 ---
 
 ## 9. Required View: Checkout (`checkout.html`)
 
-Present a clearly numbered **three-step checkout flow**:
+### Required structure
 
-1. **Personal details** — e.g., full name, email address, and phone (if needed).
-2. **Shipping address** — e.g., street address, apartment/unit, city, state/region, postal code, and country.
-3. **Card payment** — visually demonstrate cardholder name, card number, expiration date, and security-code fields.
+- Reuse the shared navbar and footer.
+- Present a **three-step checkout flow** in order:
+  1. **Personal details** — name, email, and other relevant contact fields.
+  2. **Shipping address** — street, unit (optional), city, region, postal code, and country.
+  3. **Card payment** — visual cardholder, card number, expiration, and security-code fields.
+- A single semantic HTML form divided into three visibly numbered sections or `<fieldset>` groups is recommended over a JavaScript wizard.
 
-Requirements:
+### Page-specific components and behavior
 
-- Reuse the common header and footer.
-- Show the order of the three steps clearly. An accessible **single HTML page with three numbered fieldsets/sections** is acceptable and recommended for a static prototype; do not invent an interactive wizard that requires JavaScript.
-- Use native `<form>`, `<fieldset>`, `<legend>`, `<label>`, and appropriate input types/autocomplete attributes where useful.
-- Group and label inputs clearly, and provide visible focus states, required field indicators, and explanatory text where needed.
-- Keep forms usable on narrow screens, with readable input widths and sufficient touch-target spacing.
-- Provide a clearly labeled **demo-only final action**. **No real charges, card processing, order submission, or storage of personal/payment data.** Do not point the form at an unverified external endpoint; avoid collecting real card numbers in a public deployed prototype. Use mock or disabled payment fields and visible demo-data guidance as appropriate.
+- Include labels, suitable input types, `autocomplete` values, and appropriate native validation attributes.
+- Provide a clearly labeled **demo-only final action**, not a real payment button connected to a processor.
+- Never transmit, collect, persist, or invite entry of real payment card data; use mock/disabled card inputs or clearly non-collecting illustrative fields.
+- Do not invent a payment backend, multi-step form engine, or order confirmation workflow.
 
-The checkout page is a **layout and usability demonstration**, not a PCI-compliant payment system.
+### Responsive design
+
+- Stack fields on small screens and use columns only where they improve readability.
+- Keep labels, helper text, step indicators, and final action usable on mobile, tablet, and desktop.
+- Prevent clipped inputs and horizontal scrolling.
+
+### Accessibility and semantic HTML
+
+- Use `<form>`, `<fieldset>`, `<legend>`, `<label>`, and native inputs meaningfully.
+- Explain required fields in text and preserve visible focus states.
+- Keep step order understandable without CSS, scripting, or visual cues alone.
+
+### Definition of done
+
+- [ ] All three steps are visible in the correct order.
+- [ ] Personal, shipping, and mock payment fields are clearly labeled.
+- [ ] Form remains legible and navigable on mobile and desktop.
+- [ ] No real transaction, card-data collection, or misleading order submission occurs.
+- [ ] Shared header/footer, semantic structure, and accessible focus are verified.
 
 ---
 
-## 10. Technical Constraints — Mandatory
+## 10. Required View: Support (`support.html`)
+
+### Required structure
+
+- Reuse the shared navbar and footer.
+- Include a clear page heading: **Support**.
+- Organize the main content into two sections: **Contact Support** and **Frequently Asked Questions (FAQ)**.
+
+### Page-specific components and behavior
+
+- **Contact Support form** with:
+  - **Name** — required text input.
+  - **Email** — required email input with native HTML validation.
+  - **Message** — required multiline `<textarea>`.
+  - **Submit** — clearly labeled action showing the intended form workflow.
+- Use a non-submitting/static demonstration of the form, since no backend or JavaScript form handling is allowed. Do not imply that support messages are actually delivered or store visitor entries.
+- Include **4–6 short FAQ question-and-answer pairs** covering general questions about shopping, shipping, returns, and technical support.
+- FAQ content must come from the team's approved content or policy sources where specifics are involved. Do not invent shipping guarantees, return terms, warranties, support promises, or product specifications.
+- Use ordinary visible question/answer sections or native `<details>` and `<summary>` for accessible HTML-only expansion.
+
+### Responsive design
+
+- Contact form and FAQ may appear beside one another on wider screens; stack them on mobile.
+- Ensure comfortable spacing, readable answers, and usable form controls at every breakpoint.
+- Avoid clipped fields or unintended horizontal overflow.
+
+### Accessibility and semantic HTML
+
+- Use `<main>`, `<section>`, semantic headings, `<form>`, `<label>`, `<input>`, `<textarea>`, and an appropriate button.
+- Associate each form field with a visible label; do not rely on placeholders alone.
+- Preserve keyboard access, clear focus states, and native FAQ disclosure behavior where used.
+
+### Definition of done
+
+- [ ] `support.html` exists and is linked from shared navigation or footer.
+- [ ] Contact form shows Name, Email, Message, and Submit controls.
+- [ ] Four to six accessible FAQs appear with approved, non-invented answers.
+- [ ] Prototype-only submission behavior is clear.
+- [ ] Responsive design, semantic HTML, and keyboard access are verified.
+
+---
+
+## 11. Technical Constraints — Mandatory
 
 **Allowed:**
 
@@ -221,7 +364,7 @@ When functionality cannot be implemented honestly with static HTML, **show the i
 
 ---
 
-## 11. Semantic HTML and Accessibility
+## 12. Semantic HTML and Accessibility
 
 - Use `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`, and `<form>` when semantically appropriate.
 - Include one clear primary `<h1>` per page and a logical descending heading hierarchy.
@@ -239,9 +382,9 @@ When functionality cannot be implemented honestly with static HTML, **show the i
 
 ---
 
-## 12. Responsive Layout Requirements
+## 13. Responsive Layout Requirements
 
-All five views must be tested at mobile, tablet, and desktop widths.
+All six views must be tested at mobile, tablet, and desktop widths.
 
 - Start with mobile-first Tailwind utility classes, then expand layouts using appropriate responsive variants.
 - **Home:** readable hero and product cards; horizontal product sets should not create page-level overflow.
@@ -249,12 +392,13 @@ All five views must be tested at mobile, tablet, and desktop widths.
 - **Product:** stacked product imagery and information on mobile; two-column layout on desktop.
 - **Cart:** item rows reflow cleanly; summary stays visible and understandable.
 - **Checkout:** labels and fields remain readable; columns collapse when needed.
+- **Support:** contact form and FAQs stack appropriately and keep controls readable.
 - Shared navigation, footer, images, and buttons must adapt naturally at all breakpoints.
 - No unintended horizontal scrolling, clipped information, overlapping elements, or unusably small controls.
 
 ---
 
-## 13. SEO and Schema.org
+## 14. SEO and Schema.org
 
 For **each HTML file**:
 
@@ -279,7 +423,7 @@ Clear, human-readable information can also improve AI/search-system understandin
 
 ---
 
-## 14. Images, Content, and Performance
+## 15. Images, Content, and Performance
 
 - Use relevant, high-quality, appropriately licensed drone/product imagery.
 - Keep assets local under `assets/images/` where practical; avoid unstable external image hotlinks.
@@ -293,40 +437,58 @@ Clear, human-readable information can also improve AI/search-system understandin
 
 ---
 
-## 15. Collaboration and Git Workflow
+## 16. Collaboration, Page Ownership, and Git Workflow
 
-Two developers will share responsibility for the project. Use a workflow that keeps changes reviewable and reduces merge conflicts.
+The Zephyr contract is delivered by **six developers, with exactly one primary owner per required page**. Each developer is accountable for implementing, testing, and documenting their assigned view. All six developers remain jointly responsible for a unified storefront experience and successful integration.
 
-1. **Never implement features directly on `main`.** Start work in a dedicated branch such as `feature/shared-layout`, `feature/home`, `feature/catalog`, `feature/product`, `feature/cart`, or `feature/checkout`.
-2. **Divide work by page or feature.** Coordinate edits to common navigation, footer, Tailwind configuration, and shared assets so both contributors do not overwrite one another.
-3. **Commit frequently**, with one logical change per commit and descriptive messages, such as `Add responsive catalog grid` or `Build checkout form sections`.
-4. **Sync before opening a PR.** Fetch the latest changes and incorporate `main` into the feature branch using the team's agreed merge/rebase method (for example `git fetch origin` followed by `git merge origin/main`; or an agreed `git pull origin main`). Test again after syncing.
-5. **Open a pull request for each major view or shared feature**, describing the change, files touched, screenshots/testing completed, and known static-prototype limitations.
-6. **Review and merge PRs into `main`** after feedback and conflict resolution. Resolve conflicts together; never force-push or overwrite a teammate's work without agreement.
-7. **Verify integration** after merging: check all cross-page links, consistency of shared markup, responsive layouts, and the deployed site.
+### Page ownership
 
-### Suggested responsibility split
+| Owner | Assigned view | Primary file | Suggested branch |
+| --- | --- | --- | --- |
+| Developer 1 | Home | `index.html` | `feature/home` |
+| Developer 2 | Catalog | `catalog.html` | `feature/catalog` |
+| Developer 3 | Product details | `product.html` | `feature/product` |
+| Developer 4 | Cart | `cart.html` | `feature/cart` |
+| Developer 5 | Checkout | `checkout.html` | `feature/checkout` |
+| Developer 6 | Support | `support.html` | `feature/support` |
 
-- **Developer A:** shared site layout, home, and catalog.
-- **Developer B:** product details, cart, and checkout.
-- **Both:** plan content/navigation, review each other's PRs, handle shared styling, test responsiveness and accessibility, and perform final QA.
+The table assigns **page ownership, not individual identities**. The team should associate each role with its designated developer through its own project-management process. A page owner maintains that page and addresses review feedback; other developers should not modify another owner's page without coordinating first.
 
-This is only a suggested split; the team may choose a different balanced allocation.
+### Shared responsibilities and integration
 
+- **Shared navigation and footer:** Agree on structure, link destinations, accessibility, and Tailwind class conventions before building individual pages. Each page owner implements the same approved markup within their own HTML file, since no JavaScript or templating engine is permitted.
+- **Shared styles and assets:** Follow the existing style guide and Tailwind setup. Designate a coordinator for changes to shared configuration, styles, and common assets; the coordinator is a *cross-cutting responsibility*, not a seventh page owner.
+- **Product data:** Use the separate product-data file as the single source of truth. Coordinate changes with the appropriate data-file maintainer and do not add product records to this document.
+- **Navigation and integration:** Validate transitions between all six pages, including Home → Catalog → Product → Cart → Checkout and access to Support.
+- **Reviews:** Every page PR should be reviewed by at least one other team member. Cross-page or shared-file changes should be reviewed by affected page owners.
+- **Final QA:** All six developers participate in testing the integrated site for responsiveness, accessibility, SEO, consistency, and performance.
+
+### Git and pull-request workflow
+
+1. **Do not commit feature work directly to `main`.** Each page owner works in the dedicated feature branch listed above. Use separate focused branches such as `feature/shared-layout` for explicitly coordinated shared work.
+2. **Keep page ownership clear.** Make changes primarily in your assigned HTML file. Discuss modifications to the shared stylesheet, Tailwind configuration, navigation conventions, or another owner's page before changing them.
+3. **Commit often** with one logical change per commit and descriptive messages, such as `Build responsive support form` or `Add catalog filter layout`.
+4. **Synchronize with `main` before requesting review.** Fetch and incorporate current `main` into your branch using the team's agreed merge or rebase process; test again afterward.
+5. **Open at least one pull request for each of the six pages.** Explain the scope, files changed, screenshots or testing evidence, and any known static-prototype limitations. Open separate PRs for substantial shared-feature changes.
+6. **Resolve conflicts collaboratively.** Do not force-push over teammates' work, bypass reviews, or overwrite another person's changes without agreement.
+7. **Merge approved work and retest integration.** Verify shared navbar/footer consistency, cross-page links, responsive layouts, and the deployed public URL after the six page branches are merged.
+
+The objective is **six clearly owned pages that function together as one coherent Zephyr website**, not six visually or structurally disconnected deliverables.
 ---
 
-## 16. Testing and Acceptance Checklist
+## 17. Testing and Acceptance Checklist
 
 ### Required pages and user journey
 
-- [ ] `index.html`, `catalog.html`, `product.html`, `cart.html`, and `checkout.html` exist.
+- [ ] `index.html`, `catalog.html`, `product.html`, `cart.html`, `checkout.html`, and `support.html` exist.
 - [ ] Every page uses the same intended header and footer structure.
-- [ ] Links between the five pages work correctly with relative URLs.
+- [ ] Links between the six pages work correctly with relative URLs.
 - [ ] Home contains navbar, hero, New Arrivals, Best Sellers, and required footer groups.
 - [ ] Catalog contains category and size-class filter UI and **20 product cards**, displayed 4x5 on desktop.
 - [ ] Product page contains image/details columns, name, reference, size, price, quantity, Add to cart, materials, and use cases.
 - [ ] Cart displays **three sample products**, their prices/quantities/line totals, subtotal, tax, total, and Purchase link.
 - [ ] Checkout presents personal details, shipping address, and mock card-payment steps.
+- [ ] Support contains a labeled Name/Email/Message form and 4–6 FAQs.
 - [ ] Static-only behaviors and demo-only checkout are clear to reviewers.
 
 ### Technical and visual quality
@@ -346,21 +508,21 @@ This is only a suggested split; the team may choose a different balanced allocat
 ### Git and teamwork
 
 - [ ] Contributors use feature branches rather than working on `main`.
-- [ ] Each major feature/page has its own PR or an agreed equivalent reviewable PR.
+- [ ] Each of the six pages has one designated primary developer and at least one reviewed PR.
 - [ ] Commit history uses meaningful messages.
 - [ ] Feature branches are synchronized with `main` before review/merge.
 - [ ] Merge conflicts are discussed and resolved collaboratively.
-- [ ] Final merged project is reviewed by both teammates.
+- [ ] All six developers participate in final integration review and QA.
 
 ---
 
-## 17. Instructions for AI Copilots and Contributors
+## 18. Instructions for AI Copilots and Contributors
 
-**Read this full product context and the separate style guide before changing any project files.** Then inspect the current repository to avoid replacing existing work.
+**Read this full product context and the separate style guide before changing any project files.** Confirm your assigned page, check the six-person ownership matrix, and inspect the repository to avoid replacing existing work.
 
 Before implementation, briefly explain:
 
-1. Which view or feature is being built.
+1. Which assigned view or coordinated shared feature is being built, and who owns it.
 2. Which files will change.
 3. The proposed semantic HTML structure.
 4. How Tailwind responsive classes will handle mobile, tablet, and desktop.
@@ -373,12 +535,12 @@ During implementation:
 - Stay strictly within HTML + Tailwind CSS.
 - Follow the existing style guide rather than creating new design tokens here.
 - Favor clean, understandable markup over unnecessary wrappers or abstractions.
-- Reuse consistent header/footer markup across the five pages.
+- Reuse consistent header/footer markup across the six pages.
 - Read and use the existing separate product-data file for all product content; never place product records into this context file or manufacture missing records.
 - Keep verified content readable and structured for search engines and people.
 - Do not invent functional cart state, live filtering, authentication, payment processing, or other JavaScript/back-end behavior.
 - Do not copy DJI's source code or branded assets.
-- Make changes incrementally, test before committing, and keep PRs focused.
-- **Do not add technologies or features beyond the assignment without team agreement.**
+- Work on your own feature branch, respect the designated page owner, make changes incrementally, test before committing, and keep PRs focused.
+- **Do not add technologies or features beyond the agreed contract scope without team agreement.**
 
-**Definition of success:** A cohesive, polished Zephyr storefront prototype with five linked views, responsive Tailwind layouts, sound semantic HTML, truthful SEO/Schema.org metadata, accessible interactions, clear demo-only limitations, PageSpeed testing, and evidence of collaborative Git practices.
+**Definition of success:** A cohesive, polished Zephyr storefront prototype with six linked views, responsive Tailwind layouts, sound semantic HTML, truthful SEO/Schema.org metadata, accessible interactions, clear demo-only limitations, PageSpeed testing, and evidence of coordinated work by six page owners using reviewed Git pull requests.
