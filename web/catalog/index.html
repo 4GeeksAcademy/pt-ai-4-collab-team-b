@@ -1,1397 +1,564 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f5f5f2">
-
-    <meta name="description"
-          content="Explore the DJI Store catalog of drones, cameras, stabilizers, audio equipment, and accessories.">
-
-    <title>Shop All Products | DJI Store</title>
-
-    <!-- GOOGLE FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-    <style>
-
-        /* =====================================
-           1. GLOBAL DESIGN SETTINGS
-        ===================================== */
-
-        :root {
-            color-scheme: light;
-            --ink: #191b1b;
-            --muted: #707471;
-            --line: #dedfda;
-            --paper: #f5f5f2;
-            --white: #ffffff;
-            --lime: #d5f46a;
-            --font-body: "DM Sans", sans-serif;
-            --font-display: "Space Grotesk", sans-serif;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            background: var(--paper);
-            color: var(--ink);
-            font-family: var(--font-body);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        select,
-        input {
-            font: inherit;
-        }
-
-
-        /* =====================================
-           2. HEADER AND NAVIGATION
-        ===================================== */
-
-        .site-header {
-            min-height: 74px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 15px clamp(20px, 5vw, 76px);
-            background: var(--white);
-            border-bottom: 1px solid var(--line);
-        }
-
-        .brand {
-            font: 700 25px/1 var(--font-display);
-            white-space: nowrap;
-        }
-
-        .brand span {
-            color: #747872;
-            font-weight: 400;
-        }
-
-        .main-nav {
-            display: flex;
-            align-items: center;
-            gap: 36px;
-        }
-
-        .main-nav a {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .main-nav a:hover,
-        .footer-links a:hover {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .nav-shop {
-            border-bottom: 2px solid var(--ink);
-            padding: 9px 0;
-        }
-
-        .nav-support {
-            color: var(--muted);
-        }
-
-
-        /* =====================================
-           3. MAIN CONTENT
-        ===================================== */
-
-        main {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 64px clamp(20px, 5vw, 76px) 92px;
-        }
-
-        .intro {
-            display: flex;
-            align-items: end;
-            justify-content: space-between;
-            gap: 24px;
-            margin-bottom: 36px;
-        }
-
-        .eyebrow {
-            margin: 0 0 12px;
-            color: #686d68;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            margin: 0;
-            font: 600 clamp(36px, 5vw, 58px)/1.02 var(--font-display);
-        }
-
-        .intro-copy {
-            max-width: 300px;
-            margin: 0 0 4px;
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.65;
-        }
-
-
-        /* =====================================
-           4. CATALOG FILTER BAR
-        ===================================== */
-
-        .filter-bar {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            padding: 14px 16px;
-            margin-bottom: 20px;
-            background: var(--white);
-            border: 1px solid var(--line);
-        }
-
-        .filter-title {
-            margin-right: auto;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .filter-control {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .filter-control label {
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .filter-control select {
-            min-width: 142px;
-            padding: 10px 12px;
-            color: var(--ink);
-            background: var(--paper);
-            border: 1px solid var(--line);
-            border-radius: 0;
-            cursor: pointer;
-        }
-
-        .filter-control input {
-            min-width: 160px;
-            padding: 10px 12px;
-            background: var(--paper);
-            color: var(--ink);
-            border: 1px solid var(--line);
-            font-size: 12px;
-        }
-
-        .filter-control input:focus-visible,
-        .filter-control select:focus-visible,
-        a:focus-visible,
-        button:focus-visible {
-            outline: 2px solid #527000;
-            outline-offset: 3px;
-        }
-
-        .reset-button {
-            padding: 10px 16px;
-            border: 0;
-            background: var(--ink);
-            color: var(--white);
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .reset-button:hover {
-            background: #40503a;
-        }
-
-
-        /* =====================================
-           5. PRODUCT RESULTS
-        ===================================== */
-
-        .result-line {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            min-height: 32px;
-            margin-bottom: 10px;
-            color: var(--muted);
-            font-size: 12px;
-        }
-
-        .result-line strong {
-            color: var(--ink);
-            font-weight: 600;
-        }
-
-
-        /* =====================================
-           6. PRODUCT GRID
-        ===================================== */
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 26px 16px;
-        }
-
-        .product-card {
-            min-width: 0;
-            animation: reveal 420ms ease both;
-        }
-
-        .product-image {
-            position: relative;
-            display: grid;
-            aspect-ratio: 1.14;
-            place-items: center;
-            overflow: hidden;
-            background: #e8e9e4;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 350ms ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.045);
-        }
-
-        .product-image::after {
-            position: absolute;
-            inset: 58% 0 0;
-            background: linear-gradient(
-                transparent,
-                rgb(0 0 0 / 13%)
-            );
-            content: "";
-            pointer-events: none;
-        }
-
-        .badge {
-            position: absolute;
-            z-index: 1;
-            top: 12px;
-            left: 12px;
-            padding: 6px 9px;
-            background: var(--lime);
-            color: var(--ink);
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 0.7px;
-            text-transform: uppercase;
-        }
-
-        .product-info {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 13px 1px 0;
-        }
-
-        .product-name {
-            margin: 0;
-            font: 600 15px/1.35 var(--font-display);
-        }
-
-        .product-category {
-            margin: 5px 0 0;
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        .product-price {
-            flex: 0 0 auto;
-            margin: 1px 0 0;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        .product-link {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 10px 15px;
-            background: var(--ink);
-            color: var(--white);
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .product-link:hover {
-            background: #40503a;
-        }
-
-
-        /* =====================================
-           7. EMPTY SEARCH RESULTS
-        ===================================== */
-
-        .empty-state {
-            grid-column: 1 / -1;
-            padding: 64px 20px;
-            text-align: center;
-            background: var(--white);
-        }
-
-        .empty-state h2 {
-            margin: 0 0 8px;
-            font: 600 22px var(--font-display);
-        }
-
-        .empty-state p {
-            margin: 0 0 20px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-
-        /* =====================================
-           8. FOOTER
-        ===================================== */
-
-        .site-footer {
-            padding: 34px clamp(20px, 5vw, 76px);
-            background: #202322;
-            color: var(--white);
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 24px;
-            max-width: 1288px;
-            margin: 0 auto;
-        }
-
-        .footer-brand {
-            font: 700 20px var(--font-display);
-        }
-
-        .footer-note {
-            margin: 7px 0 0;
-            color: #b2b6b1;
-            font-size: 11px;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-            color: #e2e4df;
-            font-size: 12px;
-        }
-
-
-        /* =====================================
-           9. ANIMATIONS
-        ===================================== */
-
-        @keyframes reveal {
-            from {
-                opacity: 0;
-                transform: translateY(9px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        /* =====================================
-           10. TABLET RESPONSIVENESS
-        ===================================== */
-
-        @media (max-width: 900px) {
-
-            main {
-                padding-top: 48px;
-            }
-
-            .product-grid {
-                grid-template-columns:
-                    repeat(3, minmax(0, 1fr));
-            }
-
-            .intro-copy {
-                max-width: 240px;
-            }
-
-            .filter-title {
-                flex-basis: 100%;
-            }
-
-            .filter-control {
-                flex: 1 1 180px;
-            }
-        }
-
-
-        /* =====================================
-           11. MOBILE RESPONSIVENESS
-        ===================================== */
-
-        @media (max-width: 640px) {
-
-            .site-header {
-                min-height: 64px;
-            }
-
-            .main-nav {
-                gap: 18px;
-            }
-
-            .main-nav a {
-                font-size: 12px;
-            }
-
-            .nav-support {
-                display: none;
-            }
-
-            main {
-                padding-top: 38px;
-                padding-bottom: 64px;
-            }
-
-            .intro {
-                display: block;
-                margin-bottom: 26px;
-            }
-
-            .intro-copy {
-                margin-top: 14px;
-            }
-
-            .filter-bar {
-                align-items: stretch;
-                flex-wrap: wrap;
-                padding: 13px;
-            }
-
-            .filter-title {
-                flex-basis: 100%;
-            }
-
-            .filter-control {
-                flex: 1 1 100%;
-                flex-direction: column;
-                align-items: stretch;
-                gap: 6px;
-            }
-
-            .filter-control input,
-            .filter-control select {
-                width: 100%;
-                min-width: 0;
-            }
-
-            #reset-filters {
-                width: 100%;
-            }
-
-            .product-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-                gap: 22px 11px;
-            }
-
-            .product-info {
-                display: block;
-            }
-
-            .product-price {
-                margin-top: 7px;
-            }
-
-            .footer-inner {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .footer-links {
-                flex-wrap: wrap;
-                gap: 14px 20px;
-            }
-        }
-
-
-        /* ACCESSIBILITY */
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Browse drones, cameras, stabilizers, audio gear and accessories.">
+  <title>Shop All Products | DJI Store</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #191b1b;
+      --muted: #5f635f;   /* darkened from #707471 so small text passes WCAG AA */
+      --line: #dedfda;
+      --paper: #f5f5f2;
+      --white: #fff;
+      --lime: #d5f46a;
+      --hover: #40503a;
+      --focus: #527000;
+      --gutter: clamp(16px, 5vw, 76px);
+      --font-body: "DM Sans", system-ui, sans-serif;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, select, input { font: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 0;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--hover); }
+
+    /* Header */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 74px;
+      padding: 15px var(--gutter);
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      font: 700 25px/1 var(--font-display);
+      white-space: nowrap;
+    }
+    .brand span { color: var(--muted); font-weight: 400; }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .main-nav a { font-size: 13px; font-weight: 600; }
+    .main-nav a:hover,
+    .footer-links a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .main-nav [aria-current="page"] {
+      padding: 9px 0;
+      border-bottom: 2px solid var(--ink);
+    }
+    .main-nav [aria-current="page"]:hover { text-decoration: none; }
+    .nav-support { color: var(--muted); }
+
+    /* Intro */
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 64px var(--gutter) 92px;
+    }
+
+    .intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font: 600 clamp(36px, 5vw, 58px)/1.02 var(--font-display);
+    }
+
+    .intro-copy {
+      max-width: 300px;
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* Filters */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .filter-title {
+      margin-right: auto;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .field label { color: var(--muted); font-size: 12px; }
+    .field select,
+    .field input {
+      padding: 10px 12px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 0;
+      font-size: 13px;
+    }
+    .field select { min-width: 142px; cursor: pointer; }
+    .field input { min-width: 160px; }
+
+    .result-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      min-height: 32px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .result-line strong { color: var(--ink); font-weight: 600; }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 26px 16px;
+    }
+
+    .product-card { min-width: 0; }
+    .product-grid.is-intro .product-card {
+      animation: reveal 420ms ease both;
+      animation-delay: var(--delay, 0ms);
+    }
+
+    .product-image {
+      position: relative;
+      aspect-ratio: 1.14;
+      overflow: hidden;
+      background: #e8e9e4;
+    }
+    .product-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 350ms ease;
+    }
+    .product-card:hover .product-image img { transform: scale(1.045); }
+    .product-image::after {
+      content: "";
+      position: absolute;
+      inset: 58% 0 0;
+      background: linear-gradient(transparent, rgb(0 0 0 / 13%));
+      pointer-events: none;
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 1;
+      padding: 6px 9px;
+      background: var(--lime);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .product-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 1px 0;
+    }
+    .product-name {
+      margin: 0;
+      font: 600 15px/1.35 var(--font-display);
+    }
+    .product-category {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .product-price {
+      flex: none;
+      margin: 1px 0 0;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .product-card .btn { margin-top: 12px; padding: 10px 15px; }
+
+    .empty-state {
+      padding: 64px 20px;
+      text-align: center;
+      background: var(--white);
+    }
+    .empty-state h2 { margin: 0 0 8px; font: 600 22px var(--font-display); }
+    .empty-state p { margin: 0 0 20px; color: var(--muted); font-size: 13px; }
+
+    /* Footer */
+    .site-footer {
+      padding: 34px var(--gutter);
+      background: #202322;
+      color: var(--white);
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 1288px;
+      margin: 0 auto;
+    }
+    .footer-brand { font: 700 20px var(--font-display); }
+    .footer-note { margin: 7px 0 0; color: #b2b6b1; font-size: 11px; }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      color: #e2e4df;
+      font-size: 12px;
+    }
+
+    @keyframes reveal {
+      from { opacity: 0; transform: translateY(9px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 900px) {
+      main { padding-top: 48px; }
+      .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .intro-copy { max-width: 240px; }
+      .filter-title { flex-basis: 100%; }
+      .field { flex: 1 1 180px; }
+    }
+
+    @media (max-width: 640px) {
+      .site-header { min-height: 64px; }
+      .main-nav { gap: 18px; }
+      .main-nav a { font-size: 12px; }
+      .nav-support { display: none; }
+
+      main { padding-top: 38px; padding-bottom: 64px; }
+      .intro { display: block; margin-bottom: 26px; }
+      .intro-copy { margin-top: 14px; }
+
+      .filter-bar { align-items: stretch; padding: 13px; }
+      .field {
+        flex: 1 1 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+      }
+      /* 16px stops iOS Safari from zooming in when a field is focused */
+      .field select,
+      .field input { width: 100%; min-width: 0; font-size: 16px; }
+      .filter-bar .btn { width: 100%; }
+
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 11px; }
+      .product-info { display: block; }
+      .product-price { margin-top: 7px; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 14px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
+  <header class="site-header" id="top">
+    <a class="brand" href="../index.html" aria-label="DJI Store home">DJI<span> store</span></a>
 
-    <!-- =====================================
-         12. WEBSITE HEADER
-    ===================================== -->
+    <nav class="main-nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Shop</a>
+      <a href="../product/index.html">Featured</a>
+      <a class="nav-support" href="#footer">Support</a>
+    </nav>
+  </header>
 
-    <header class="site-header">
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">DJI Store / Explore</p>
+        <h1 id="page-title">Find your next<br>perspective.</h1>
+      </div>
+      <p class="intro-copy">
+        From the first flight to the big production, find the gear that helps you make more.
+      </p>
+    </section>
 
-        <a
-            class="brand"
-            href="../index.html"
-            aria-label="DJI Store home"
-        >
-            DJI<span> store</span>
-        </a>
+    <form class="filter-bar" id="filters" aria-label="Filter products" role="search">
+      <span class="filter-title">Refine your search</span>
 
-        <nav class="main-nav" aria-label="Main navigation">
+      <div class="field">
+        <label for="category-filter">Category</label>
+        <select id="category-filter" name="category">
+          <option value="all">All categories</option>
+        </select>
+      </div>
 
-            <a
-                class="nav-shop"
-                href="index.html"
-                aria-current="page"
-            >
-                Shop
-            </a>
+      <div class="field">
+        <label for="tier-filter">Product class</label>
+        <select id="tier-filter" name="tier">
+          <option value="all">All classes</option>
+        </select>
+      </div>
 
-            <a href="../product/index.html">
-                Featured
-            </a>
+      <div class="field">
+        <label for="product-search">Search</label>
+        <input type="search" id="product-search" name="q" placeholder="Search products…" autocomplete="off">
+      </div>
 
-            <a class="nav-support" href="#footer">
-                Support
-            </a>
+      <div class="field">
+        <label for="sort-filter">Sort by</label>
+        <select id="sort-filter" name="sort">
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: low to high</option>
+          <option value="price-high">Price: high to low</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+      </div>
 
-        </nav>
+      <button class="btn" type="reset">Reset</button>
+    </form>
 
-    </header>
+    <div class="result-line">
+      <strong id="result-count" aria-live="polite"></strong>
+      <span>New perspectives start here</span>
+    </div>
 
+    <section class="product-grid is-intro" id="product-grid" aria-label="Products"></section>
 
-    <!-- =====================================
-         13. MAIN CATALOG CONTENT
-    ===================================== -->
+    <div class="empty-state" id="empty-state" hidden>
+      <h2>No products found</h2>
+      <p>Try changing your filters or search term.</p>
+      <button class="btn" type="reset" form="filters">Clear filters</button>
+    </div>
+  </main>
 
-    <main>
+  <footer class="site-footer" id="footer">
+    <div class="footer-inner">
+      <div>
+        <a class="footer-brand" href="../index.html">DJI store</a>
+        <p class="footer-note">The future of possible.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="index.html">Shop all</a>
+        <a href="../product/index.html">Featured</a>
+        <a href="#top">Back to top</a>
+      </nav>
+    </div>
+  </footer>
 
-        <section class="intro" aria-labelledby="page-title">
-
-            <div>
-
-                <p class="eyebrow">
-                    DJI Store / Explore
-                </p>
-
-                <h1 id="page-title">
-                    Find your next<br>perspective.
-                </h1>
-
-            </div>
-
-            <p class="intro-copy">
-                From the first flight to the big production,
-                find the gear that helps you make more.
-            </p>
-
-        </section>
-
-
-        <!-- =====================================
-             14. PRODUCT FILTERS
-        ===================================== -->
-
-        <section
-            class="filter-bar"
-            aria-label="Filter products"
-        >
-
-            <span class="filter-title">
-                Refine your search
-            </span>
-
-
-            <!-- CATEGORY FILTER -->
-
-            <div class="filter-control">
-
-                <label for="category-filter">
-                    Category
-                </label>
-
-                <select id="category-filter">
-                    <option value="all">
-                        All categories
-                    </option>
-                </select>
-
-            </div>
-
-
-            <!-- PRODUCT CLASS FILTER -->
-
-            <div class="filter-control">
-
-                <label for="size-filter">
-                    Product Class
-                </label>
-
-                <select id="size-filter">
-                    <option value="all">
-                        All classes
-                    </option>
-                </select>
-
-            </div>
-
-
-            <!-- SEARCH INPUT -->
-
-            <div class="filter-control">
-
-                <label for="product-search">
-                    Search
-                </label>
-
-                <input
-                    type="search"
-                    id="product-search"
-                    placeholder="Search DJI products..."
-                    autocomplete="off"
-                >
-
-            </div>
-
-
-            <!-- SORT PRODUCTS -->
-
-            <div class="filter-control">
-
-                <label for="sort-filter">
-                    Sort by
-                </label>
-
-                <select id="sort-filter">
-
-                    <option value="featured">
-                        Featured
-                    </option>
-
-                    <option value="price-low">
-                        Price: Low to High
-                    </option>
-
-                    <option value="price-high">
-                        Price: High to Low
-                    </option>
-
-                    <option value="name">
-                        Name: A to Z
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- RESET BUTTON -->
-
-            <button
-                class="reset-button"
-                id="reset-filters"
-                type="button"
-            >
-                Reset
-            </button>
-
-        </section>
-
-
-        <!-- =====================================
-             15. RESULT COUNTER
-        ===================================== -->
-
-        <div class="result-line" aria-live="polite">
-
-            <span id="result-count">
-                <strong>20 products</strong>
-            </span>
-
-            <span>
-                New perspectives start here
-            </span>
-
+  <template id="card-template">
+    <article class="product-card">
+      <div class="product-image">
+        <span class="badge"></span>
+        <img alt="" loading="lazy" width="760" height="667">
+      </div>
+      <div class="product-info">
+        <div>
+          <h2 class="product-name"></h2>
+          <p class="product-category"></p>
         </div>
-
-
-        <!-- =====================================
-             16. PRODUCT GRID
-        ===================================== -->
-
-        <section
-            class="product-grid"
-            id="product-grid"
-            aria-label="Products"
-        >
-        </section>
-
-    </main>
-
-
-    <!-- =====================================
-         17. FOOTER
-    ===================================== -->
-
-    <footer class="site-footer" id="footer">
-
-        <div class="footer-inner">
-
-            <div>
-
-                <a
-                    class="footer-brand"
-                    href="../index.html"
-                >
-                    DJI store
-                </a>
-
-                <p class="footer-note">
-                    The future of possible.
-                </p>
-
-            </div>
-
-            <nav
-                class="footer-links"
-                aria-label="Footer navigation"
-            >
-
-                <a href="index.html">
-                    Shop all
-                </a>
-
-                <a href="../product/index.html">
-                    Featured
-                </a>
-
-                <a href="#page-title">
-                    Back to top
-                </a>
-
-            </nav>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =====================================
-         18. JAVASCRIPT
-    ===================================== -->
-
-    <script>
-
-        /* =====================================
-           PRODUCT DATABASE
-
-           These are demonstration prices.
-           Replace with verified team data
-           before production deployment.
-        ===================================== */
-
-        const products = [
-
-            {
-                name: "Mavic 4 Pro",
-                category: "Aerial",
-                size: "Professional",
-                price: "$2,199",
-                badge: "New",
-                image: "photo-1473968512647-3e447244af8f"
-            },
-
-            {
-                name: "Air 3S",
-                category: "Aerial",
-                size: "Standard",
-                price: "$1,099",
-                badge: "Popular",
-                image: "photo-1508615070457-7baeba4003ab"
-            },
-
-            {
-                name: "Mini 4 Pro",
-                category: "Aerial",
-                size: "Compact",
-                price: "$759",
-                badge: "Under 249 g",
-                image: "photo-1527977966376-1c8408f9f108"
-            },
-
-            {
-                name: "Avata 2",
-                category: "Aerial",
-                size: "Compact",
-                price: "$999",
-                badge: "FPV",
-                image: "photo-1506947411487-a56738267384"
-            },
-
-            {
-                name: "DJI Neo",
-                category: "Aerial",
-                size: "Compact",
-                price: "$199",
-                badge: "New",
-                image: "photo-1521405924368-64c5b84bec60"
-            },
-
-            {
-                name: "Flip",
-                category: "Aerial",
-                size: "Compact",
-                price: "$439",
-                badge: "Travel ready",
-                image: "photo-1473968512647-3e447244af8f"
-            },
-
-            {
-                name: "Inspire 3",
-                category: "Aerial",
-                size: "Professional",
-                price: "$16,499",
-                badge: "Cinema grade",
-                image: "photo-1508615070457-7baeba4003ab"
-            },
-
-            {
-                name: "Matrice 4T",
-                category: "Aerial",
-                size: "Professional",
-                price: "$7,299",
-                badge: "Enterprise",
-                image: "photo-1527977966376-1c8408f9f108"
-            },
-
-            {
-                name: "Osmo Pocket 3",
-                category: "Cameras",
-                size: "Compact",
-                price: "$519",
-                badge: "Creator favorite",
-                image: "photo-1516035069371-29a1b244cc32"
-            },
-
-            {
-                name: "Osmo Action 5 Pro",
-                category: "Cameras",
-                size: "Compact",
-                price: "$349",
-                badge: "Waterproof",
-                image: "photo-1526170375885-4d8ecf77b99f"
-            },
-
-            {
-                name: "Zenmuse X9-8K",
-                category: "Cameras",
-                size: "Professional",
-                price: "$3,799",
-                badge: "8K raw",
-                image: "photo-1519183071298-a2962be90b8e"
-            },
-
-            {
-                name: "Osmo Mobile 7P",
-                category: "Stabilizers",
-                size: "Compact",
-                price: "$129",
-                badge: "Smart tracking",
-                image: "photo-1606983340126-99ab4feaa64a"
-            },
-
-            {
-                name: "RS 4 Mini",
-                category: "Stabilizers",
-                size: "Standard",
-                price: "$369",
-                badge: "Lightweight",
-                image: "photo-1502920917128-1aa500764cbd"
-            },
-
-            {
-                name: "RS 4 Pro",
-                category: "Stabilizers",
-                size: "Professional",
-                price: "$869",
-                badge: "Pro setup",
-                image: "photo-1516035069371-29a1b244cc32"
-            },
-
-            {
-                name: "Mic 2",
-                category: "Audio",
-                size: "Compact",
-                price: "$349",
-                badge: "32-bit float",
-                image: "photo-1590602847861-f357a9332bbc"
-            },
-
-            {
-                name: "Mic Mini",
-                category: "Audio",
-                size: "Compact",
-                price: "$169",
-                badge: "Ultra-light",
-                image: "photo-1598488035139-bdbb2231ce04"
-            },
-
-            {
-                name: "Power 1000",
-                category: "Power",
-                size: "Large",
-                price: "$699",
-                badge: "1024 Wh",
-                image: "photo-1473341304170-971dccb5ac1e"
-            },
-
-            {
-                name: "Goggles 3",
-                category: "Accessories",
-                size: "Standard",
-                price: "$499",
-                badge: "Immersive",
-                image: "photo-1506947411487-a56738267384"
-            },
-
-            {
-                name: "RC Motion 3",
-                category: "Accessories",
-                size: "Compact",
-                price: "$99",
-                badge: "Intuitive control",
-                image: "photo-1521405924368-64c5b84bec60"
-            },
-
-            {
-                name: "Fly More Kit",
-                category: "Accessories",
-                size: "Standard",
-                price: "$299",
-                badge: "More flight time",
-                image: "photo-1527977966376-1c8408f9f108"
-            }
-
-        ];
-
-
-        /* =====================================
-           19. CONNECT HTML ELEMENTS
-        ===================================== */
-
-        const categoryFilter =
-            document.querySelector("#category-filter");
-
-        const sizeFilter =
-            document.querySelector("#size-filter");
-
-        const searchInput =
-            document.querySelector("#product-search");
-
-        const sortFilter =
-            document.querySelector("#sort-filter");
-
-        const resetButton =
-            document.querySelector("#reset-filters");
-
-        const productGrid =
-            document.querySelector("#product-grid");
-
-        const resultCount =
-            document.querySelector("#result-count");
-
-
-        /* =====================================
-           20. POPULATE FILTER OPTIONS
-        ===================================== */
-
-        function addFilterOptions(select, values) {
-
-            values.forEach((value) => {
-
-                const option = document.createElement("option");
-
-                option.value = value;
-                option.textContent = value;
-
-                select.append(option);
-
-            });
-
-        }
-
-
-        /* =====================================
-           21. CONVERT PRICE TO NUMBER
-        ===================================== */
-
-        function getNumericPrice(price) {
-
-            return Number(
-                price.replace(/[^0-9.]/g, "")
-            );
-
-        }
-
-
-        /* =====================================
-           22. FILTER AND DISPLAY PRODUCTS
-        ===================================== */
-
-        function renderProducts() {
-
-            const selectedCategory = categoryFilter.value;
-
-            const selectedClass = sizeFilter.value;
-
-            const searchText =
-                searchInput.value.trim().toLowerCase();
-
-            const selectedSort = sortFilter.value;
-
-
-            /* FILTER PRODUCTS */
-
-            let visibleProducts = products.filter((product) => {
-
-                const matchesCategory =
-                    selectedCategory === "all" ||
-                    product.category === selectedCategory;
-
-                const matchesClass =
-                    selectedClass === "all" ||
-                    product.size === selectedClass;
-
-                const searchableText = [
-                    product.name,
-                    product.category,
-                    product.size,
-                    product.badge
-                ].join(" ").toLowerCase();
-
-                const matchesSearch =
-                    searchableText.includes(searchText);
-
-                return (
-                    matchesCategory &&
-                    matchesClass &&
-                    matchesSearch
-                );
-
-            });
-
-
-            /* SORT PRODUCTS */
-
-            if (selectedSort === "price-low") {
-
-                visibleProducts.sort((a, b) =>
-                    getNumericPrice(a.price) -
-                    getNumericPrice(b.price)
-                );
-
-            } else if (selectedSort === "price-high") {
-
-                visibleProducts.sort((a, b) =>
-                    getNumericPrice(b.price) -
-                    getNumericPrice(a.price)
-                );
-
-            } else if (selectedSort === "name") {
-
-                visibleProducts.sort((a, b) =>
-                    a.name.localeCompare(b.name)
-                );
-
-            }
-
-
-            /* UPDATE PRODUCT COUNT */
-
-            resultCount.textContent =
-                `${visibleProducts.length} of ${products.length} products`;
-
-
-            /* CLEAR PREVIOUS PRODUCT CARDS */
-
-            productGrid.replaceChildren();
-
-
-            /* NO MATCHING PRODUCTS */
-
-            if (visibleProducts.length === 0) {
-
-                const emptyState =
-                    document.createElement("div");
-
-                emptyState.className = "empty-state";
-
-                const heading =
-                    document.createElement("h2");
-
-                heading.textContent = "No products found";
-
-                const message =
-                    document.createElement("p");
-
-                message.textContent =
-                    "Try changing your filters or search term.";
-
-                emptyState.append(heading, message);
-
-                productGrid.append(emptyState);
-
-                return;
-
-            }
-
-
-            /* =====================================
-               23. GENERATE PRODUCT CARDS
-            ===================================== */
-
-            visibleProducts.forEach((product, index) => {
-
-                const card =
-                    document.createElement("article");
-
-                card.className = "product-card";
-
-                card.style.animationDelay =
-                    `${Math.min(index, 8) * 35}ms`;
-
-
-                /* PRODUCT IMAGE CONTAINER */
-
-                const imageContainer =
-                    document.createElement("div");
-
-                imageContainer.className = "product-image";
-
-
-                /* PRODUCT BADGE */
-
-                const badge =
-                    document.createElement("span");
-
-                badge.className = "badge";
-
-                badge.textContent = product.badge;
-
-
-                /* PRODUCT IMAGE */
-
-                const image =
-                    document.createElement("img");
-
-                image.src = product.localImage ||
-                    `https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=760&q=82`;
-
-                image.alt = product.name;
-
-                image.loading = "lazy";
-
-                imageContainer.append(badge, image);
-
-
-                /* PRODUCT INFORMATION */
-
-                const productInfo =
-                    document.createElement("div");
-
-                productInfo.className = "product-info";
-
-                const textContainer =
-                    document.createElement("div");
-
-
-                /* PRODUCT NAME */
-
-                const name =
-                    document.createElement("h2");
-
-                name.className = "product-name";
-
-                name.textContent = product.name;
-
-
-                /* PRODUCT CATEGORY */
-
-                const category =
-                    document.createElement("p");
-
-                category.className = "product-category";
-
-                category.textContent =
-                    `${product.category} · ${product.size}`;
-
-                textContainer.append(name, category);
-
-
-                /* PRODUCT PRICE */
-
-                const price =
-                    document.createElement("p");
-
-                price.className = "product-price";
-
-                price.textContent = product.price;
-
-                productInfo.append(textContainer, price);
-
-
-                /* VIEW DETAILS LINK */
-
-                const detailsLink =
-                    document.createElement("a");
-
-                detailsLink.className = "product-link";
-
-                detailsLink.href =
-                    `../product/index.html?product=${encodeURIComponent(product.name)}`;
-
-                detailsLink.textContent = "View Details";
-
-                detailsLink.setAttribute(
-                    "aria-label",
-                    `View details for ${product.name}`
-                );
-
-
-                /* ADD CARD TO PRODUCT GRID */
-
-                card.append(
-                    imageContainer,
-                    productInfo,
-                    detailsLink
-                );
-
-                productGrid.append(card);
-
-            });
-
-        }
-
-
-        /* =====================================
-           24. LOAD CATEGORY FILTER
-        ===================================== */
-
-        const categories = [
-            ...new Set(
-                products.map(product => product.category)
-            )
-        ];
-
-        addFilterOptions(categoryFilter, categories);
-
-
-        /* =====================================
-           25. LOAD PRODUCT CLASS FILTER
-        ===================================== */
-
-        const productClasses = [
-            ...new Set(
-                products.map(product => product.size)
-            )
-        ];
-
-        addFilterOptions(sizeFilter, productClasses);
-
-
-        /* =====================================
-           26. CONNECT EVENT LISTENERS
-        ===================================== */
-
-        categoryFilter.addEventListener(
-            "change",
-            renderProducts
-        );
-
-        sizeFilter.addEventListener(
-            "change",
-            renderProducts
-        );
-
-        searchInput.addEventListener(
-            "input",
-            renderProducts
-        );
-
-        sortFilter.addEventListener(
-            "change",
-            renderProducts
-        );
-
-
-        /* =====================================
-           27. RESET ALL FILTERS
-        ===================================== */
-
-        resetButton.addEventListener("click", () => {
-
-            categoryFilter.value = "all";
-
-            sizeFilter.value = "all";
-
-            searchInput.value = "";
-
-            sortFilter.value = "featured";
-
-            renderProducts();
-
-        });
-
-
-        /* =====================================
-           28. LOAD CATALOG ON PAGE OPEN
-        ===================================== */
-
-        renderProducts();
-
-    </script>
-
+        <p class="product-price"></p>
+      </div>
+      <a class="btn">View details</a>
+    </article>
+  </template>
+
+  <script>
+    // Prices are placeholders - swap in real numbers before this goes live.
+    // TODO: several products share the same stock photo; replace with real product shots.
+    const products = [
+      { name: "Mavic 4 Pro",       category: "Aerial",      tier: "Professional", price: 2199,  badge: "New",               image: "photo-1473968512647-3e447244af8f" },
+      { name: "Air 3S",            category: "Aerial",      tier: "Standard",     price: 1099,  badge: "Popular",           image: "photo-1508615070457-7baeba4003ab" },
+      { name: "Mini 4 Pro",        category: "Aerial",      tier: "Compact",      price: 759,   badge: "Under 249 g",       image: "photo-1527977966376-1c8408f9f108" },
+      { name: "Avata 2",           category: "Aerial",      tier: "Compact",      price: 999,   badge: "FPV",               image: "photo-1506947411487-a56738267384" },
+      { name: "DJI Neo",           category: "Aerial",      tier: "Compact",      price: 199,   badge: "New",               image: "photo-1521405924368-64c5b84bec60" },
+      { name: "Flip",              category: "Aerial",      tier: "Compact",      price: 439,   badge: "Travel ready",      image: "photo-1473968512647-3e447244af8f" },
+      { name: "Inspire 3",         category: "Aerial",      tier: "Professional", price: 16499, badge: "Cinema grade",      image: "photo-1508615070457-7baeba4003ab" },
+      { name: "Matrice 4T",        category: "Aerial",      tier: "Professional", price: 7299,  badge: "Enterprise",        image: "photo-1527977966376-1c8408f9f108" },
+      { name: "Osmo Pocket 3",     category: "Cameras",     tier: "Compact",      price: 519,   badge: "Creator favorite",  image: "photo-1516035069371-29a1b244cc32" },
+      { name: "Osmo Action 5 Pro", category: "Cameras",     tier: "Compact",      price: 349,   badge: "Waterproof",        image: "photo-1526170375885-4d8ecf77b99f" },
+      { name: "Zenmuse X9-8K",     category: "Cameras",     tier: "Professional", price: 3799,  badge: "8K raw",            image: "photo-1519183071298-a2962be90b8e" },
+      { name: "Osmo Mobile 7P",    category: "Stabilizers", tier: "Compact",      price: 129,   badge: "Smart tracking",    image: "photo-1606983340126-99ab4feaa64a" },
+      { name: "RS 4 Mini",         category: "Stabilizers", tier: "Standard",     price: 369,   badge: "Lightweight",       image: "photo-1502920917128-1aa500764cbd" },
+      { name: "RS 4 Pro",          category: "Stabilizers", tier: "Professional", price: 869,   badge: "Pro setup",         image: "photo-1516035069371-29a1b244cc32" },
+      { name: "Mic 2",             category: "Audio",       tier: "Compact",      price: 349,   badge: "32-bit float",      image: "photo-1590602847861-f357a9332bbc" },
+      { name: "Mic Mini",          category: "Audio",       tier: "Compact",      price: 169,   badge: "Ultra-light",       image: "photo-1598488035139-bdbb2231ce04" },
+      { name: "Power 1000",        category: "Power",       tier: "Large",        price: 699,   badge: "1024 Wh",           image: "photo-1473341304170-971dccb5ac1e" },
+      { name: "Goggles 3",         category: "Accessories", tier: "Standard",     price: 499,   badge: "Immersive",         image: "photo-1506947411487-a56738267384" },
+      { name: "RC Motion 3",       category: "Accessories", tier: "Compact",      price: 99,    badge: "Intuitive control", image: "photo-1521405924368-64c5b84bec60" },
+      { name: "Fly More Kit",      category: "Accessories", tier: "Standard",     price: 299,   badge: "More flight time",  image: "photo-1527977966376-1c8408f9f108" },
+    ];
+
+    const form = document.getElementById("filters");
+    const categorySelect = document.getElementById("category-filter");
+    const tierSelect = document.getElementById("tier-filter");
+    const searchInput = document.getElementById("product-search");
+    const sortSelect = document.getElementById("sort-filter");
+    const grid = document.getElementById("product-grid");
+    const emptyState = document.getElementById("empty-state");
+    const resultCount = document.getElementById("result-count");
+    const cardTemplate = document.getElementById("card-template");
+
+    const formatPrice = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format;
+
+    const sorters = {
+      "price-low": (a, b) => a.price - b.price,
+      "price-high": (a, b) => b.price - a.price,
+      name: (a, b) => a.name.localeCompare(b.name),
+    };
+
+    function fillSelect(select, key) {
+      const values = [...new Set(products.map((p) => p[key]))];
+      for (const value of values) {
+        select.add(new Option(value, value));
+      }
+    }
+
+    function getVisibleProducts() {
+      const category = categorySelect.value;
+      const tier = tierSelect.value;
+      const query = searchInput.value.trim().toLowerCase();
+
+      const matches = products.filter((p) => {
+        if (category !== "all" && p.category !== category) return false;
+        if (tier !== "all" && p.tier !== tier) return false;
+        if (!query) return true;
+
+        const haystack = `${p.name} ${p.category} ${p.tier} ${p.badge}`.toLowerCase();
+        return haystack.includes(query);
+      });
+
+      // filter() returns a new array, so sorting it won't touch the original order
+      const sorter = sorters[sortSelect.value];
+      return sorter ? matches.sort(sorter) : matches;
+    }
+
+    function createCard(product, index) {
+      const card = cardTemplate.content.firstElementChild.cloneNode(true);
+      const img = card.querySelector("img");
+      const link = card.querySelector(".btn");
+
+      card.style.setProperty("--delay", `${Math.min(index, 8) * 35}ms`);
+      card.querySelector(".badge").textContent = product.badge;
+      card.querySelector(".product-name").textContent = product.name;
+      card.querySelector(".product-category").textContent = `${product.category} · ${product.tier}`;
+      card.querySelector(".product-price").textContent = formatPrice(product.price);
+
+      // The photo is generic stock, so it's decorative - the name below is the real label.
+      img.src = `https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=760&q=80`;
+
+      link.href = `../product/index.html?product=${encodeURIComponent(product.name)}`;
+      link.setAttribute("aria-label", `View details for ${product.name}`);
+
+      return card;
+    }
+
+    function render() {
+      const visible = getVisibleProducts();
+      const total = products.length;
+
+      resultCount.textContent = visible.length === total
+        ? `${total} products`
+        : `${visible.length} of ${total} products`;
+
+      grid.replaceChildren(...visible.map(createCard));
+      emptyState.hidden = visible.length > 0;
+    }
+
+    // Only animate the first load - replaying it on every keystroke looks jumpy.
+    function handleChange() {
+      grid.classList.remove("is-intro");
+      render();
+    }
+
+    fillSelect(categorySelect, "category");
+    fillSelect(tierSelect, "tier");
+
+    form.addEventListener("input", handleChange);
+    form.addEventListener("submit", (e) => e.preventDefault()); // Enter in the search box shouldn't reload the page
+    form.addEventListener("reset", () => {
+      // the reset event fires before the fields are cleared
+      requestAnimationFrame(handleChange);
+    });
+
+    render();
+  </script>
 </body>
-
 </html>
