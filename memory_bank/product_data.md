@@ -16,10 +16,10 @@ Sample data for **Zephyr**, a toy drone and camera store. Everything here is fic
 **Hero** (2 slides)
 | Headline | Tagline | Button |
 |---|---|---|
-| Zephyr Air | Chase the View | Learn More |
+| Zephyr | Chase the View | Learn More |
 | Creator Season | Free Sky Case with any drone combo | Shop Now |
 
-**New arrivals** (horizontal cards): Zephyr Neo, Zephyr Air, Action Cam 6, Orbit 360, PowerBox 300, Clip Mic 3
+**New arrivals** (horizontal cards): Zephyr Neo, Zephyr, Action Cam 6, Orbit 360, PowerBox 300, Clip Mic 3
 
 **Best sellers** (horizontal cards): Zephyr Mini, Pocket Cam 3, Phone Gimbal 8, PowerBox 1000, Sky Case, Prop Set
 
@@ -39,7 +39,7 @@ Sample data for **Zephyr**, a toy drone and camera store. Everything here is fic
 | 1 | Zephyr Neo | ZPH-DR-001 | Camera Drones | 199 | S, M |
 | 2 | Zephyr Flip | ZPH-DR-002 | Camera Drones | 439 | S, M |
 | 3 | Zephyr Mini | ZPH-DR-003 | Camera Drones | 479 | S, M, L |
-| 4 | Zephyr Air | ZPH-DR-004 | Camera Drones | 999 | S, M, L |
+| 4 | Zephyr | ZPH-DR-004 | Camera Drones | 999 | S, M, L |
 | 5 | Zephyr Pro | ZPH-DR-005 | Camera Drones | 2199 | M, L |
 | 6 | Pocket Cam 3 | ZPH-HH-001 | Handheld | 519 | S, M |
 | 7 | Action Cam 6 | ZPH-HH-002 | Handheld | 379 | S, M, L |
@@ -57,7 +57,7 @@ Sample data for **Zephyr**, a toy drone and camera store. Everything here is fic
 | 19 | Clip Mic 3 | ZPH-AC-004 | Accessories | 99 | One Size |
 | 20 | Memory Card 128 | ZPH-AC-005 | Accessories | 25 | One Size |
 
-**Size guide:** for drones, handheld, and power, S = device only, M = combo (extra battery or accessories), L = pro combo (adds case and extras). For accessories, S / M / L = fit (S fits Mini, M fits Air, L fits Pro). The price is the same for every size in this static prototype.
+**Size guide:** for drones, handheld, and power, S = device only, M = combo (extra battery or accessories), L = pro combo (adds case and extras). For accessories, S / M / L = fit (S fits Mini, M fits Zephyr, L fits Pro). The price is the same for every size in this static prototype.
 
 ---
 
@@ -71,7 +71,7 @@ Below: a description section with **Materials** and **Recommended use**.
 | Zephyr Neo | Recycled ABS shell, carbon-fiber-blend propellers | First flights, selfies, backyard and indoor use |
 | Zephyr Flip | Polycarbonate body, nylon propeller guards | Vlogging, family trips, close-range filming |
 | Zephyr Mini | Magnesium-alloy frame, polycarbonate shell | Travel, hiking, beginner aerial photography |
-| Zephyr Air | Carbon-fiber arms, magnesium-alloy frame | Landscape photography, travel films, sunset shoots |
+| Zephyr | Carbon-fiber arms, magnesium-alloy frame | Landscape photography, travel films, sunset shoots |
 | Zephyr Pro | Carbon-fiber composite body, magnesium-alloy gimbal | Commercial shoots, cinematic projects, real estate |
 | Pocket Cam 3 | Aluminum body, glass lens | Vlogs, street video, travel diaries |
 | Action Cam 6 | Polycarbonate shell, tempered-glass lens, silicone seals | Biking, surfing, skiing, any fast sport |
