@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
   <meta name="description" content="Browse drones, cameras, stabilizers, audio gear and accessories.">
-  <title>Shop All Products | DJI Store</title>
+  <title>Shop All Products | Zephyr Store</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -336,7 +336,7 @@
 
 <body>
   <header class="site-header" id="top">
-    <a class="brand" href="../index.html" aria-label="DJI Store home">DJI<span> store</span></a>
+    <a class="brand" href="../index.html" aria-label="Zephyr Store home">Zephyr<span> store</span></a>
 
     <nav class="main-nav" aria-label="Main">
       <a href="index.html" aria-current="page">Shop</a>
@@ -348,7 +348,7 @@
   <main>
     <section class="intro" aria-labelledby="page-title">
       <div>
-        <p class="eyebrow">DJI Store / Explore</p>
+        <p class="eyebrow">Zephyr Store / Explore</p>
         <h1 id="page-title">Find your next<br>perspective.</h1>
       </div>
       <p class="intro-copy">
@@ -367,9 +367,9 @@
       </div>
 
       <div class="field">
-        <label for="tier-filter">Product class</label>
-        <select id="tier-filter" name="tier">
-          <option value="all">All classes</option>
+        <label for="size-filter">Size</label>
+        <select id="size-filter" name="size">
+          <option value="all">All sizes</option>
         </select>
       </div>
 
@@ -408,7 +408,7 @@
   <footer class="site-footer" id="footer">
     <div class="footer-inner">
       <div>
-        <a class="footer-brand" href="../index.html">DJI store</a>
+        <a class="footer-brand" href="../index.html">Zephyr store</a>
         <p class="footer-note">The future of possible.</p>
       </div>
       <nav class="footer-links" aria-label="Footer">
@@ -437,34 +437,34 @@
   </template>
 
   <script>
-    // Prices are placeholders - swap in real numbers before this goes live.
+    // Product names, categories, prices, codes, and sizes come from product_data.md.
     // TODO: several products share the same stock photo; replace with real product shots.
     const products = [
-      { name: "Mavic 4 Pro",       category: "Aerial",      tier: "Professional", price: 2199,  badge: "New",               image: "photo-1473968512647-3e447244af8f" },
-      { name: "Air 3S",            category: "Aerial",      tier: "Standard",     price: 1099,  badge: "Popular",           image: "photo-1508615070457-7baeba4003ab" },
-      { name: "Mini 4 Pro",        category: "Aerial",      tier: "Compact",      price: 759,   badge: "Under 249 g",       image: "photo-1527977966376-1c8408f9f108" },
-      { name: "Avata 2",           category: "Aerial",      tier: "Compact",      price: 999,   badge: "FPV",               image: "photo-1506947411487-a56738267384" },
-      { name: "DJI Neo",           category: "Aerial",      tier: "Compact",      price: 199,   badge: "New",               image: "photo-1521405924368-64c5b84bec60" },
-      { name: "Flip",              category: "Aerial",      tier: "Compact",      price: 439,   badge: "Travel ready",      image: "photo-1473968512647-3e447244af8f" },
-      { name: "Inspire 3",         category: "Aerial",      tier: "Professional", price: 16499, badge: "Cinema grade",      image: "photo-1508615070457-7baeba4003ab" },
-      { name: "Matrice 4T",        category: "Aerial",      tier: "Professional", price: 7299,  badge: "Enterprise",        image: "photo-1527977966376-1c8408f9f108" },
-      { name: "Osmo Pocket 3",     category: "Cameras",     tier: "Compact",      price: 519,   badge: "Creator favorite",  image: "photo-1516035069371-29a1b244cc32" },
-      { name: "Osmo Action 5 Pro", category: "Cameras",     tier: "Compact",      price: 349,   badge: "Waterproof",        image: "photo-1526170375885-4d8ecf77b99f" },
-      { name: "Zenmuse X9-8K",     category: "Cameras",     tier: "Professional", price: 3799,  badge: "8K raw",            image: "photo-1519183071298-a2962be90b8e" },
-      { name: "Osmo Mobile 7P",    category: "Stabilizers", tier: "Compact",      price: 129,   badge: "Smart tracking",    image: "photo-1606983340126-99ab4feaa64a" },
-      { name: "RS 4 Mini",         category: "Stabilizers", tier: "Standard",     price: 369,   badge: "Lightweight",       image: "photo-1502920917128-1aa500764cbd" },
-      { name: "RS 4 Pro",          category: "Stabilizers", tier: "Professional", price: 869,   badge: "Pro setup",         image: "photo-1516035069371-29a1b244cc32" },
-      { name: "Mic 2",             category: "Audio",       tier: "Compact",      price: 349,   badge: "32-bit float",      image: "photo-1590602847861-f357a9332bbc" },
-      { name: "Mic Mini",          category: "Audio",       tier: "Compact",      price: 169,   badge: "Ultra-light",       image: "photo-1598488035139-bdbb2231ce04" },
-      { name: "Power 1000",        category: "Power",       tier: "Large",        price: 699,   badge: "1024 Wh",           image: "photo-1473341304170-971dccb5ac1e" },
-      { name: "Goggles 3",         category: "Accessories", tier: "Standard",     price: 499,   badge: "Immersive",         image: "photo-1506947411487-a56738267384" },
-      { name: "RC Motion 3",       category: "Accessories", tier: "Compact",      price: 99,    badge: "Intuitive control", image: "photo-1521405924368-64c5b84bec60" },
-      { name: "Fly More Kit",      category: "Accessories", tier: "Standard",     price: 299,   badge: "More flight time",  image: "photo-1527977966376-1c8408f9f108" },
+      { name: "Zephyr Neo",       code: "ZPH-DR-001", category: "Camera Drones", price: 199,  sizes: ["S", "M"],           image: "photo-1473968512647-3e447244af8f" },
+      { name: "Zephyr Flip",      code: "ZPH-DR-002", category: "Camera Drones", price: 439,  sizes: ["S", "M"],           image: "photo-1508615070457-7baeba4003ab" },
+      { name: "Zephyr Mini",      code: "ZPH-DR-003", category: "Camera Drones", price: 479,  sizes: ["S", "M", "L"],      image: "photo-1527977966376-1c8408f9f108" },
+      { name: "Zephyr",           code: "ZPH-DR-004", category: "Camera Drones", price: 999,  sizes: ["S", "M", "L"],      image: "photo-1506947411487-a56738267384" },
+      { name: "Zephyr Pro",       code: "ZPH-DR-005", category: "Camera Drones", price: 2199, sizes: ["M", "L"],           image: "photo-1521405924368-64c5b84bec60" },
+      { name: "Pocket Cam 3",     code: "ZPH-HH-001", category: "Handheld",      price: 519,  sizes: ["S", "M"],           image: "photo-1516035069371-29a1b244cc32" },
+      { name: "Action Cam 6",     code: "ZPH-HH-002", category: "Handheld",      price: 379,  sizes: ["S", "M", "L"],      image: "photo-1526170375885-4d8ecf77b99f" },
+      { name: "Phone Gimbal 8",   code: "ZPH-HH-003", category: "Handheld",      price: 159,  sizes: ["S", "M"],           image: "photo-1606983340126-99ab4feaa64a" },
+      { name: "Stabilizer S5",    code: "ZPH-HH-004", category: "Handheld",      price: 749,  sizes: ["M", "L"],           image: "photo-1502920917128-1aa500764cbd" },
+      { name: "Orbit 360",        code: "ZPH-HH-005", category: "Handheld",      price: 449,  sizes: ["S", "M"],           image: "photo-1519183071298-a2962be90b8e" },
+      { name: "PowerBox 300",     code: "ZPH-PW-001", category: "Power",         price: 299,  sizes: ["S", "M"],           image: "photo-1473341304170-971dccb5ac1e" },
+      { name: "PowerBox 600",     code: "ZPH-PW-002", category: "Power",         price: 499,  sizes: ["S", "M", "L"],      image: "photo-1508615070457-7baeba4003ab" },
+      { name: "PowerBox 1000",    code: "ZPH-PW-003", category: "Power",         price: 899,  sizes: ["M", "L"],           image: "photo-1527977966376-1c8408f9f108" },
+      { name: "SolarFold 100",    code: "ZPH-PW-004", category: "Power",         price: 199,  sizes: ["S", "M"],           image: "photo-1473341304170-971dccb5ac1e" },
+      { name: "Charge Hub 3",     code: "ZPH-PW-005", category: "Power",         price: 79,   sizes: ["One Size"],         image: "photo-1516035069371-29a1b244cc32" },
+      { name: "Sky Case",         code: "ZPH-AC-001", category: "Accessories",   price: 59,   sizes: ["S", "M", "L"],      image: "photo-1526170375885-4d8ecf77b99f" },
+      { name: "Prop Set",         code: "ZPH-AC-002", category: "Accessories",   price: 19,   sizes: ["S", "M", "L"],      image: "photo-1502920917128-1aa500764cbd" },
+      { name: "ND Filter Kit",    code: "ZPH-AC-003", category: "Accessories",   price: 49,   sizes: ["S", "M", "L"],      image: "photo-1519183071298-a2962be90b8e" },
+      { name: "Clip Mic 3",       code: "ZPH-AC-004", category: "Accessories",   price: 99,   sizes: ["One Size"],         image: "photo-1590602847861-f357a9332bbc" },
+      { name: "Memory Card 128",  code: "ZPH-AC-005", category: "Accessories",   price: 25,   sizes: ["One Size"],         image: "photo-1598488035139-bdbb2231ce04" },
     ];
 
     const form = document.getElementById("filters");
     const categorySelect = document.getElementById("category-filter");
-    const tierSelect = document.getElementById("tier-filter");
+    const sizeSelect = document.getElementById("size-filter");
     const searchInput = document.getElementById("product-search");
     const sortSelect = document.getElementById("sort-filter");
     const grid = document.getElementById("product-grid");
@@ -485,7 +485,7 @@
     };
 
     function fillSelect(select, key) {
-      const values = [...new Set(products.map((p) => p[key]))];
+      const values = [...new Set(products.flatMap((p) => p[key]))];
       for (const value of values) {
         select.add(new Option(value, value));
       }
@@ -493,15 +493,15 @@
 
     function getVisibleProducts() {
       const category = categorySelect.value;
-      const tier = tierSelect.value;
+      const size = sizeSelect.value;
       const query = searchInput.value.trim().toLowerCase();
 
       const matches = products.filter((p) => {
         if (category !== "all" && p.category !== category) return false;
-        if (tier !== "all" && p.tier !== tier) return false;
+        if (size !== "all" && !p.sizes.includes(size)) return false;
         if (!query) return true;
 
-        const haystack = `${p.name} ${p.category} ${p.tier} ${p.badge}`.toLowerCase();
+        const haystack = `${p.name} ${p.code} ${p.category} ${p.sizes.join(" ")}`.toLowerCase();
         return haystack.includes(query);
       });
 
@@ -516,9 +516,9 @@
       const link = card.querySelector(".btn");
 
       card.style.setProperty("--delay", `${Math.min(index, 8) * 35}ms`);
-      card.querySelector(".badge").textContent = product.badge;
+      card.querySelector(".badge").textContent = product.code;
       card.querySelector(".product-name").textContent = product.name;
-      card.querySelector(".product-category").textContent = `${product.category} · ${product.tier}`;
+      card.querySelector(".product-category").textContent = `${product.category} · Sizes ${product.sizes.join(", ")}`;
       card.querySelector(".product-price").textContent = formatPrice(product.price);
 
       // The photo is generic stock, so it's decorative - the name below is the real label.
@@ -549,7 +549,7 @@
     }
 
     fillSelect(categorySelect, "category");
-    fillSelect(tierSelect, "tier");
+    fillSelect(sizeSelect, "sizes");
 
     form.addEventListener("input", handleChange);
     form.addEventListener("submit", (e) => e.preventDefault()); // Enter in the search box shouldn't reload the page
