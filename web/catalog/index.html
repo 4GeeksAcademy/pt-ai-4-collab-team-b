@@ -3,32 +3,598 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalog | Zepher</title>
-    <link rel="stylesheet" href="../assets/shared.css">
+    <meta name="theme-color" content="#f5f5f2">
+    <title>Shop all products | DJI Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #191b1b;
+            --muted: #707471;
+            --line: #dedfda;
+            --paper: #f5f5f2;
+            --white: #fff;
+            --lime: #d5f46a;
+            --font-body: "DM Sans", sans-serif;
+            --font-display: "Space Grotesk", sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        button, select { font: inherit; }
+
+        .site-header {
+            height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(20px, 5vw, 76px);
+            background: var(--white);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            font: 700 25px/1 var(--font-display);
+            letter-spacing: 0;
+        }
+
+        .brand span { color: #747872; font-weight: 400; }
+
+        .main-nav { display: flex; align-items: center; gap: 36px; }
+        .main-nav a { font-size: 13px; font-weight: 600; }
+        .main-nav a:hover, .footer-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+        .nav-shop { border-bottom: 2px solid var(--ink); padding: 9px 0; }
+        .nav-support { color: var(--muted); }
+
+        main { max-width: 1440px; margin: 0 auto; padding: 64px clamp(20px, 5vw, 76px) 92px; }
+
+        .intro { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+        .eyebrow { margin: 0 0 12px; color: #686d68; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+        h1 { margin: 0; font: 600 clamp(36px, 5vw, 58px)/1.02 var(--font-display); letter-spacing: 0; }
+        .intro-copy { max-width: 300px; margin: 0 0 4px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            background: var(--white);
+            border: 1px solid var(--line);
+        }
+
+        .filter-title { margin-right: auto; font-size: 12px; font-weight: 700; }
+        .filter-control { display: flex; align-items: center; gap: 9px; }
+        .filter-control label { color: var(--muted); font-size: 12px; }
+        .filter-control select {
+            min-width: 142px;
+            padding: 10px 34px 10px 12px;
+            color: var(--ink);
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        .filter-control select:focus-visible, a:focus-visible, button:focus-visible {
+            outline: 2px solid #527000;
+            outline-offset: 3px;
+        }
+
+        .result-line { display: flex; align-items: center; justify-content: space-between; min-height: 32px; margin-bottom: 10px; color: var(--muted); font-size: 12px; }
+        .result-line strong { color: var(--ink); font-weight: 600; }
+        .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px 16px; }
+
+        .product-card { min-width: 0; animation: reveal 420ms ease both; }
+        .product-image {
+            position: relative;
+            display: grid;
+            aspect-ratio: 1.14;
+            place-items: center;
+            overflow: hidden;
+            background: #e8e9e4;
+        }
+
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 350ms ease; }
+        .product-card:hover .product-image img { transform: scale(1.045); }
+        .product-image::after { position: absolute; inset: 58% 0 0; background: linear-gradient(transparent, rgb(0 0 0 / 13%)); content: ""; pointer-events: none; }
+        .badge { position: absolute; z-index: 1; top: 12px; left: 12px; padding: 6px 9px; background: var(--lime); color: var(--ink); font-size: 9px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; }
+        .product-info { display: flex; justify-content: space-between; gap: 12px; padding: 13px 1px 0; }
+        .product-name { margin: 0; font: 600 15px/1.35 var(--font-display); }
+        .product-category { margin: 5px 0 0; color: var(--muted); font-size: 11px; }
+        .product-price { flex: 0 0 auto; margin: 1px 0 0; font-size: 13px; font-weight: 600; }
+
+        .empty-state { grid-column: 1 / -1; padding: 64px 20px; text-align: center; background: var(--white); }
+        .empty-state h2 { margin: 0 0 8px; font: 600 22px var(--font-display); }
+        .empty-state p { margin: 0 0 20px; color: var(--muted); font-size: 13px; }
+        .reset-button { padding: 10px 16px; border: 0; background: var(--ink); color: var(--white); cursor: pointer; }
+
+        .site-footer { padding: 34px clamp(20px, 5vw, 76px); background: #202322; color: var(--white); }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; max-width: 1288px; margin: 0 auto; }
+        .footer-brand { font: 700 20px var(--font-display); }
+        .footer-note { margin: 7px 0 0; color: #b2b6b1; font-size: 11px; }
+        .footer-links { display: flex; gap: 24px; color: #e2e4df; font-size: 12px; }
+
+        @keyframes reveal { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 900px) {
+            main { padding-top: 48px; }
+            .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .intro-copy { max-width: 240px; }
+        }
+
+        @media (max-width: 640px) {
+            .site-header { height: 64px; }
+            .main-nav { gap: 18px; }
+            .main-nav a { font-size: 12px; }
+            .nav-support { display: none; }
+            main { padding-top: 38px; padding-bottom: 64px; }
+            .intro { display: block; margin-bottom: 26px; }
+            .intro-copy { margin-top: 14px; }
+            .filter-bar { align-items: stretch; flex-wrap: wrap; padding: 13px; }
+            .filter-title { flex-basis: 100%; }
+            .filter-control { flex: 1; flex-direction: column; align-items: stretch; gap: 6px; }
+            .filter-control select { width: 100%; min-width: 0; }
+            .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 11px; }
+            .product-info { display: block; }
+            .product-price { margin-top: 7px; }
+            .footer-inner { align-items: flex-start; flex-direction: column; }
+            .footer-links { flex-wrap: wrap; gap: 14px 20px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+        }
+
+/* ADDITIONAL CATALOG STYLING */
+
+.filter-bar {
+    flex-wrap: wrap;
+}
+
+.filter-control input {
+    min-width: 160px;
+    padding: 10px 12px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    font-family: var(--font-body);
+    font-size: 12px;
+}
+
+.filter-control input:focus-visible {
+    outline: 2px solid #527000;
+    outline-offset: 3px;
+}
+
+#reset-filters {
+    padding: 10px 16px;
+    white-space: nowrap;
+}
+
+.product-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 15px;
+    background: var(--ink);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.product-link:hover {
+    background: #40503a;
+}
+
+@media (max-width: 900px) {
+    .filter-title {
+        flex-basis: 100%;
+    }
+
+    .filter-control {
+        flex: 1 1 180px;
+    }
+}
+
+@media (max-width: 640px) {
+    .filter-control {
+        flex: 1 1 100%;
+    }
+
+    .filter-control input,
+    .filter-control select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    #reset-filters {
+        width: 100%;
+    }
+}
+    </style>
 </head>
 <body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <header class="site-header"><div class="container">
-        <nav class="navbar" aria-label="Main navigation">
-            <a class="brand" href="../index.html" aria-label="Zepher homepage"><span class="brand-mark" aria-hidden="true">Z</span><span>zepher</span></a>
-            <div class="desktop-nav"><a href="../catalog/index.html">Explore</a><a href="../index.html#new-arrivals">New arrivals</a><a href="../index.html#best-sellers">Best sellers</a><a href="../index.html#about">Our vision</a></div>
-            <div class="nav-actions">
-                <form class="search-form desktop-search" role="search" action="../catalog/index.html"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/search.svg" width="18" height="18" alt=""><input type="search" name="q" placeholder="Search products..." aria-label="Search products" disabled title="Search is unavailable in this static prototype"></form>
-                <details class="account-wrapper"><summary class="account-button" aria-label="User account"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/user-round.svg" width="20" height="20" alt="">Account</summary><div class="account-menu"><button type="button" disabled>Sign in (unavailable)</button><button type="button" disabled>Create account (unavailable)</button><button type="button" disabled>My orders (unavailable)</button><a href="#footer-contact">Contact</a></div></details>
-                <a class="bag-link" href="../cart/index.html" aria-label="Shopping bag" title="Shopping bag"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/shopping-bag.svg" width="22" height="22" alt=""></a>
-            </div>
+    <header class="site-header">
+        <a class="brand" href="../index.html" aria-label="DJI Store home">DJI<span> store</span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a class="nav-shop" href="index.html" aria-current="page">Shop</a>
+            <a href="../product/index.html">Featured</a>
+            <a class="nav-support" href="#footer">Support</a>
         </nav>
-        <details class="mobile-nav"><summary>Menu</summary><a href="../index.html">Home</a><a href="../catalog/index.html">Explore</a><a href="../index.html#new-arrivals">New arrivals</a><a href="../index.html#best-sellers">Best sellers</a><a href="../index.html#about">Our vision</a><form class="search-form mobile-search" role="search" action="../catalog/index.html"><input type="search" name="q" placeholder="Search products..." aria-label="Search products" disabled title="Search is unavailable in this static prototype"></form></details>
-    </div></header>
-    <main class="container page-content" id="main-content"><h1>Catalog Page</h1></main>
-    <footer class="site-footer"><div class="container">
-        <div class="footer-main">
-            <div class="footer-brand-column"><a class="brand" href="../index.html" aria-label="Zepher homepage"><span class="brand-mark" aria-hidden="true">Z</span><span>zepher</span></a><p class="footer-brand-description">A fresh perspective on aerial technology. Built around exploration, creative freedom, and innovation.</p></div>
-            <nav aria-labelledby="footer-categories"><h2 class="footer-heading" id="footer-categories">Categories</h2><ul class="footer-links"><li><a href="../catalog/index.html?category=footwear">Footwear</a></li><li><a href="../catalog/index.html?category=shirts">Shirts</a></li><li><a href="../catalog/index.html?category=pants">Pants</a></li><li><a href="../catalog/index.html?category=accessories">Accessories</a></li></ul></nav>
-            <nav aria-labelledby="footer-legal"><h2 class="footer-heading" id="footer-legal">Legal</h2><ul class="footer-links"><li><details><summary>Terms and conditions</summary><p>Student prototype. No orders or payments are processed. All product information is fictional.</p></details></li><li><details><summary>Privacy policy</summary><p>This static prototype has no account or payment processing. Images and fonts load from external providers.</p></details></li><li><a href="../index.html#about">About the brand</a></li></ul></nav>
-            <div id="footer-contact"><h2 class="footer-heading">Contact</h2><div class="footer-contact"><p>Have a question about Zepher?</p><a href="mailto:hello@zephyr.example">hello@zephyr.example</a><a href="tel:+15550100">+1 555-0100</a><p>123 Sample Street<br>Springfield, USA</p></div></div>
+    </header>
+
+    <main>
+        <section class="intro" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">DJI Store / Explore</p>
+                <h1 id="page-title">Find your next<br>perspective.</h1>
+            </div>
+            <p class="intro-copy">From the first flight to the big production, find the gear that helps you make more.</p>
+        </section>
+
+
+<section class="filter-bar" aria-label="Filter products">
+
+    <span class="filter-title">Refine your search</span>
+
+    <!-- CATEGORY FILTER -->
+    <div class="filter-control">
+        <label for="category-filter">Category</label>
+        <select id="category-filter">
+            <option value="all">All categories</option>
+        </select>
+    </div>
+
+    <!-- PRODUCT CLASS FILTER -->
+    <div class="filter-control">
+        <label for="size-filter">Product Class</label>
+        <select id="size-filter">
+            <option value="all">All classes</option>
+        </select>
+    </div>
+
+    <!-- PRODUCT SEARCH -->
+    <div class="filter-control">
+        <label for="product-search">Search</label>
+        <input
+            type="search"
+            id="product-search"
+            placeholder="Search DJI products..."
+            autocomplete="off"
+        >
+    </div>
+
+    <!-- SORT PRODUCTS -->
+    <div class="filter-control">
+        <label for="sort-filter">Sort by</label>
+        <select id="sort-filter">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+        </select>
+    </div>
+
+    <!-- RESET FILTERS -->
+    <button
+        class="reset-button"
+        id="reset-filters"
+        type="button"
+    >
+        Reset
+    </button>
+
+</section>
+
+
+        <div class="result-line" aria-live="polite">
+            <span id="result-count"><strong>20 products</strong></span>
+            <span>New perspectives start here</span>
         </div>
-        <div class="footer-bottom"><p>&copy; 2026 Zepher. All rights reserved.</p><p>Designed for a world without limits.</p></div>
-    </div></footer>
+        <section class="product-grid" id="product-grid" aria-label="Products"></section>
+    </main>
+
+    <footer class="site-footer" id="footer">
+        <div class="footer-inner">
+            <div>
+                <a class="footer-brand" href="../index.html">DJI store</a>
+                <p class="footer-note">The future of possible.</p>
+            </div>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="index.html">Shop all</a>
+                <a href="../product/index.html">Featured</a>
+                <a href="#page-title">Back to top</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        const products = [
+            { name: "Mavic 4 Pro", category: "Aerial", size: "Professional", price: "$2,199", badge: "New", image: "photo-1473968512647-3e447244af8f" },
+            { name: "Air 3S", category: "Aerial", size: "Standard", price: "$1,099", badge: "Popular", image: "photo-1508615070457-7baeba4003ab" },
+            { name: "Mini 4 Pro", category: "Aerial", size: "Compact", price: "$759", badge: "Under 249 g", image: "photo-1527977966376-1c8408f9f108" },
+            { name: "Avata 2", category: "Aerial", size: "Compact", price: "$999", badge: "FPV", image: "photo-1506947411487-a56738267384" },
+            { name: "DJI Neo", category: "Aerial", size: "Compact", price: "$199", badge: "New", image: "photo-1521405924368-64c5b84bec60" },
+            { name: "Flip", category: "Aerial", size: "Compact", price: "$439", badge: "Travel ready", image: "photo-1473968512647-3e447244af8f" },
+            { name: "Inspire 3", category: "Aerial", size: "Professional", price: "$16,499", badge: "Cinema grade", image: "photo-1508615070457-7baeba4003ab" },
+            { name: "Matrice 4T", category: "Aerial", size: "Professional", price: "$7,299", badge: "Enterprise", image: "photo-1527977966376-1c8408f9f108" },
+            { name: "Osmo Pocket 3", category: "Cameras", size: "Compact", price: "$519", badge: "Creator favorite", image: "photo-1516035069371-29a1b244cc32" },
+            { name: "Osmo Action 5 Pro", category: "Cameras", size: "Compact", price: "$349", badge: "Waterproof", image: "photo-1526170375885-4d8ecf77b99f" },
+            { name: "Zenmuse X9-8K", category: "Cameras", size: "Professional", price: "$3,799", badge: "8K raw", image: "photo-1519183071298-a2962be90b8e" },
+            { name: "Osmo Mobile 7P", category: "Stabilizers", size: "Compact", price: "$129", badge: "Smart tracking", image: "photo-1606983340126-99ab4feaa64a" },
+            { name: "RS 4 Mini", category: "Stabilizers", size: "Standard", price: "$369", badge: "Lightweight", image: "photo-1502920917128-1aa500764cbd" },
+            { name: "RS 4 Pro", category: "Stabilizers", size: "Professional", price: "$869", badge: "Pro setup", image: "photo-1516035069371-29a1b244cc32" },
+            { name: "Mic 2", category: "Audio", size: "Compact", price: "$349", badge: "32-bit float", image: "photo-1590602847861-f357a9332bbc" },
+            { name: "Mic Mini", category: "Audio", size: "Compact", price: "$169", badge: "Ultra-light", image: "photo-1598488035139-bdbb2231ce04" },
+            { name: "Power 1000", category: "Power", size: "Large", price: "$699", badge: "1024 Wh", image: "photo-1473341304170-971dccb5ac1e" },
+            { name: "Goggles 3", category: "Accessories", size: "Standard", price: "$499", badge: "Immersive", image: "photo-1506947411487-a56738267384" },
+            { name: "RC Motion 3", category: "Accessories", size: "Compact", price: "$99", badge: "Intuitive control", image: "photo-1521405924368-64c5b84bec60" },
+            { name: "Fly More Kit", category: "Accessories", size: "Standard", price: "$299", badge: "More flight time", image: "photo-1527977966376-1c8408f9f108" }
+        ];
+
+const categoryFilter =
+    document.querySelector("#category-filter");
+
+const sizeFilter =
+    document.querySelector("#size-filter");
+
+const searchInput =
+    document.querySelector("#product-search");
+
+const sortFilter =
+    document.querySelector("#sort-filter");
+
+const resetButton =
+    document.querySelector("#reset-filters");
+
+const productGrid =
+    document.querySelector("#product-grid");
+
+const resultCount =
+    document.querySelector("#result-count");
+
+
+// CREATE FILTER OPTIONS
+
+function addFilterOptions(select, values) {
+    values.forEach((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.append(option);
+    });
+}
+
+
+// CONVERT PRICE INTO NUMBER
+
+function getNumericPrice(price) {
+    return Number(price.replace(/[^0-9.]/g, ""));
+}
+
+
+// DISPLAY PRODUCTS
+
+function renderProducts() {
+
+    const selectedCategory = categoryFilter.value;
+    const selectedClass = sizeFilter.value;
+    const searchText = searchInput.value.trim().toLowerCase();
+    const selectedSort = sortFilter.value;
+
+    let visibleProducts = products.filter((product) => {
+
+        const matchesCategory =
+            selectedCategory === "all" ||
+            product.category === selectedCategory;
+
+        const matchesClass =
+            selectedClass === "all" ||
+            product.size === selectedClass;
+
+        const searchableText = [
+            product.name,
+            product.category,
+            product.size,
+            product.badge
+        ].join(" ").toLowerCase();
+
+        const matchesSearch =
+            searchableText.includes(searchText);
+
+        return matchesCategory && matchesClass && matchesSearch;
+    });
+
+
+    // SORT PRODUCTS
+
+    if (selectedSort === "price-low") {
+        visibleProducts.sort((a, b) =>
+            getNumericPrice(a.price) - getNumericPrice(b.price)
+        );
+    }
+
+    if (selectedSort === "price-high") {
+        visibleProducts.sort((a, b) =>
+            getNumericPrice(b.price) - getNumericPrice(a.price)
+        );
+    }
+
+    if (selectedSort === "name") {
+        visibleProducts.sort((a, b) =>
+            a.name.localeCompare(b.name)
+        );
+    }
+
+
+    // UPDATE RESULT COUNT
+
+    resultCount.textContent =
+        `${visibleProducts.length} of ${products.length} products`;
+
+
+    // CLEAR OLD CARDS
+
+    productGrid.replaceChildren();
+
+
+    // DISPLAY MESSAGE IF NO PRODUCTS MATCH
+
+    if (visibleProducts.length === 0) {
+        const emptyState = document.createElement("div");
+        emptyState.className = "empty-state";
+
+        const heading = document.createElement("h2");
+        heading.textContent = "No products found";
+
+        const message = document.createElement("p");
+        message.textContent =
+            "Try changing your filters or search term.";
+
+        emptyState.append(heading, message);
+        productGrid.append(emptyState);
+        return;
+    }
+
+
+    // CREATE PRODUCT CARDS
+
+    visibleProducts.forEach((product, index) => {
+
+        const card = document.createElement("article");
+        card.className = "product-card";
+        card.style.animationDelay =
+            `${Math.min(index, 8) * 35}ms`;
+
+        const imageContainer = document.createElement("div");
+        imageContainer.className = "product-image";
+
+        const badge = document.createElement("span");
+        badge.className = "badge";
+        badge.textContent = product.badge;
+
+        const image = document.createElement("img");
+        image.src = product.localImage ||
+            `https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=760&q=82`;
+        image.alt = product.name;
+        image.loading = "lazy";
+
+        imageContainer.append(badge, image);
+
+        const productInfo = document.createElement("div");
+        productInfo.className = "product-info";
+
+        const textContainer = document.createElement("div");
+
+        const name = document.createElement("h2");
+        name.className = "product-name";
+        name.textContent = product.name;
+
+        const category = document.createElement("p");
+        category.className = "product-category";
+        category.textContent =
+            `${product.category} · ${product.size}`;
+
+        textContainer.append(name, category);
+
+        const price = document.createElement("p");
+        price.className = "product-price";
+        price.textContent = product.price;
+
+        productInfo.append(textContainer, price);
+
+        const detailsLink = document.createElement("a");
+        detailsLink.className = "product-link";
+        detailsLink.href =
+            `../product/index.html?product=${encodeURIComponent(product.name)}`;
+        detailsLink.textContent = "View Details";
+        detailsLink.setAttribute(
+            "aria-label",
+            `View details for ${product.name}`
+        );
+
+        card.append(imageContainer, productInfo, detailsLink);
+        productGrid.append(card);
+    });
+}
+
+
+// POPULATE CATEGORY FILTER
+
+const categories = [
+    ...new Set(products.map(product => product.category))
+];
+
+addFilterOptions(categoryFilter, categories);
+
+
+// POPULATE PRODUCT CLASS FILTER
+
+const productClasses = [
+    ...new Set(products.map(product => product.size))
+];
+
+addFilterOptions(sizeFilter, productClasses);
+
+
+// CONNECT FILTERS
+
+categoryFilter.addEventListener("change", renderProducts);
+sizeFilter.addEventListener("change", renderProducts);
+searchInput.addEventListener("input", renderProducts);
+sortFilter.addEventListener("change", renderProducts);
+
+
+// RESET FILTERS
+
+resetButton.addEventListener("click", () => {
+    categoryFilter.value = "all";
+    sizeFilter.value = "all";
+    searchInput.value = "";
+    sortFilter.value = "featured";
+    renderProducts();
+});
+
+
+// LOAD CATALOG
+
+renderProducts();
+
+
+
+            visibleProducts.forEach((product, index) => {
+                const card = document.createElement("article");
+                card.className = "product-card";
+                card.style.animationDelay = `${Math.min(index, 8) * 35}ms`;
+                card.innerHTML = `
+                    <div class="product-image">
+                        <span class="badge">${product.badge}</span>
+                        <img src="https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=760&q=82" alt="${product.name}" loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <div><h2 class="product-name">${product.name}</h2><p class="product-category">${product.category} · ${product.size}</p></div>
+                        <p class="product-price">${product.price}</p>
+                    </div>`;
+                productGrid.append(card);
+            });
+        }
+
+        addFilterOptions(categoryFilter, [...new Set(products.map((product) => product.category))], "All categories");
+        addFilterOptions(sizeFilter, [...new Set(products.map((product) => product.size))], "All sizes");
+        categoryFilter.addEventListener("change", renderProducts);
+        sizeFilter.addEventListener("change", renderProducts);
+        renderProducts();
+    </script>
 </body>
 </html>
