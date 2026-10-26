@@ -3,32 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | Zepher</title>
-    <link rel="stylesheet" href="../assets/shared.css">
+    <meta name="theme-color" content="#f9fbfe">
+    <title>Checkout | DJI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <a class="skip-link" href="#main-content">Skip to main content</a>
-    <header class="site-header"><div class="container">
-        <nav class="navbar" aria-label="Main navigation">
-            <a class="brand" href="../index.html" aria-label="Zepher homepage"><span class="brand-mark" aria-hidden="true">Z</span><span>zepher</span></a>
-            <div class="desktop-nav"><a href="../catalog/index.html">Explore</a><a href="../index.html#new-arrivals">New arrivals</a><a href="../index.html#best-sellers">Best sellers</a><a href="../index.html#about">Our vision</a></div>
-            <div class="nav-actions">
-                <form class="search-form desktop-search" role="search" action="../catalog/index.html"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/search.svg" width="18" height="18" alt=""><input type="search" name="q" placeholder="Search products..." aria-label="Search products" disabled title="Search is unavailable in this static prototype"></form>
-                <details class="account-wrapper"><summary class="account-button" aria-label="User account"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/user-round.svg" width="20" height="20" alt="">Account</summary><div class="account-menu"><button type="button" disabled>Sign in (unavailable)</button><button type="button" disabled>Create account (unavailable)</button><button type="button" disabled>My orders (unavailable)</button><a href="#footer-contact">Contact</a></div></details>
-                <a class="bag-link" href="../cart/index.html" aria-label="Shopping bag" title="Shopping bag"><img src="https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/icons/shopping-bag.svg" width="22" height="22" alt=""></a>
-            </div>
-        </nav>
-        <details class="mobile-nav"><summary>Menu</summary><a href="../index.html">Home</a><a href="../catalog/index.html">Explore</a><a href="../index.html#new-arrivals">New arrivals</a><a href="../index.html#best-sellers">Best sellers</a><a href="../index.html#about">Our vision</a><form class="search-form mobile-search" role="search" action="../catalog/index.html"><input type="search" name="q" placeholder="Search products..." aria-label="Search products" disabled title="Search is unavailable in this static prototype"></form></details>
-    </div></header>
-    <main class="container page-content" id="main-content"><h1>Checkout page</h1></main>
-    <footer class="site-footer"><div class="container">
-        <div class="footer-main">
-            <div class="footer-brand-column"><a class="brand" href="../index.html" aria-label="Zepher homepage"><span class="brand-mark" aria-hidden="true">Z</span><span>zepher</span></a><p class="footer-brand-description">A fresh perspective on aerial technology. Built around exploration, creative freedom, and innovation.</p></div>
-            <nav aria-labelledby="footer-categories"><h2 class="footer-heading" id="footer-categories">Categories</h2><ul class="footer-links"><li><a href="../catalog/index.html?category=footwear">Footwear</a></li><li><a href="../catalog/index.html?category=shirts">Shirts</a></li><li><a href="../catalog/index.html?category=pants">Pants</a></li><li><a href="../catalog/index.html?category=accessories">Accessories</a></li></ul></nav>
-            <nav aria-labelledby="footer-legal"><h2 class="footer-heading" id="footer-legal">Legal</h2><ul class="footer-links"><li><details><summary>Terms and conditions</summary><p>Student prototype. No orders or payments are processed. All product information is fictional.</p></details></li><li><details><summary>Privacy policy</summary><p>This static prototype has no account or payment processing. Images and fonts load from external providers.</p></details></li><li><a href="../index.html#about">About the brand</a></li></ul></nav>
-            <div id="footer-contact"><h2 class="footer-heading">Contact</h2><div class="footer-contact"><p>Have a question about Zepher?</p><a href="mailto:hello@zephyr.example">hello@zephyr.example</a><a href="tel:+15550100">+1 555-0100</a><p>123 Sample Street<br>Springfield, USA</p></div></div>
+<body class="bg-[#f9fbfe] font-['Montserrat',sans-serif] text-[#060c13] antialiased">
+    <header class="border-b border-[#e2e7e3] bg-white">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
+            <a href="../index.html" class="text-xl font-bold tracking-[0.18em]" aria-label="DJI home">DJI</a>
+            <a href="../cart/index.html" class="text-sm font-medium text-[#343837] hover:text-[#486b00]">Back to cart</a>
         </div>
-        <div class="footer-bottom"><p>&copy; 2026 Zepher. All rights reserved.</p><p>Designed for a world without limits.</p></div>
-    </div></footer>
+    </header>
+
+    <main class="mx-auto max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
+        <div class="mb-10 border-b border-[#e2e7e3] pb-7">
+            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#486b00]">Almost yours</p>
+            <h1 class="font-['EB_Garamond',serif] text-5xl font-semibold leading-none sm:text-6xl">Checkout</h1>
+            <ol class="mt-7 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#777d79] sm:gap-5" aria-label="Checkout progress">
+                <li class="flex items-center gap-2 text-[#486b00]"><span class="grid size-6 place-items-center rounded-full bg-[#486b00] text-white">1</span> Information</li>
+                <li aria-hidden="true" class="h-px w-7 bg-[#cbd1cb] sm:w-12"></li>
+                <li class="flex items-center gap-2"><span class="grid size-6 place-items-center rounded-full border border-[#cbd1cb]">2</span> Shipping</li>
+                <li aria-hidden="true" class="h-px w-7 bg-[#cbd1cb] sm:w-12"></li>
+                <li class="flex items-center gap-2"><span class="grid size-6 place-items-center rounded-full border border-[#cbd1cb]">3</span> Payment</li>
+            </ol>
+        </div>
+
+        <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-20">
+            <form action="#" method="get" class="space-y-10">
+                <section aria-labelledby="personal-heading">
+                    <div class="mb-5 flex items-baseline justify-between gap-4">
+                        <h2 id="personal-heading" class="text-lg font-semibold">Personal details</h2>
+                        <span class="text-xs text-[#777d79]">Fields marked * are required</span>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <label class="text-xs font-semibold">First name *
+                            <input required autocomplete="given-name" name="first-name" placeholder="e.g. Alex" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold">Last name *
+                            <input required autocomplete="family-name" name="last-name" placeholder="e.g. Morgan" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold sm:col-span-2">Email address *
+                            <input required type="email" autocomplete="email" name="email" placeholder="you@example.com" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold sm:col-span-2">Phone number
+                            <input type="tel" autocomplete="tel" name="phone" placeholder="(555) 000-0000" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                    </div>
+                </section>
+
+                <section aria-labelledby="shipping-heading" class="border-t border-[#e2e7e3] pt-9">
+                    <div class="mb-5 flex items-baseline justify-between gap-4">
+                        <h2 id="shipping-heading" class="text-lg font-semibold">Shipping information</h2>
+                        <span class="text-xs text-[#777d79]">Free standard shipping</span>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2">
+                        <label class="text-xs font-semibold sm:col-span-2">Street address *
+                            <input required autocomplete="address-line1" name="address" placeholder="Street address" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold sm:col-span-2">Apartment, suite, etc.
+                            <input autocomplete="address-line2" name="address-line2" placeholder="Apartment, suite, unit (optional)" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold">City *
+                            <input required autocomplete="address-level2" name="city" placeholder="City" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold">State / Province *
+                            <input required autocomplete="address-level1" name="state" placeholder="State or province" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold">ZIP / Postal code *
+                            <input required autocomplete="postal-code" name="postal-code" placeholder="ZIP or postal code" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold">Country / Region *
+                            <select required autocomplete="country-name" name="country" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal text-[#343837] outline-none focus:border-[#486b00]">
+                                <option value="" selected disabled>Select a country</option>
+                                <option>United States</option>
+                                <option>Canada</option>
+                                <option>United Kingdom</option>
+                            </select>
+                        </label>
+                    </div>
+                </section>
+
+                <section aria-labelledby="payment-heading" class="border-t border-[#e2e7e3] pt-9">
+                    <div class="mb-5">
+                        <h2 id="payment-heading" class="text-lg font-semibold">Payment</h2>
+                        <p class="mt-1 text-sm text-[#777d79]">Choose a payment method. Your payment details are encrypted and secure.</p>
+                    </div>
+                    <fieldset>
+                        <legend class="sr-only">Payment method</legend>
+                        <div class="grid gap-3 sm:grid-cols-2">
+                            <label class="flex cursor-pointer items-center gap-3 rounded-sm border border-[#486b00] bg-[#f5f8ef] p-4 text-sm font-semibold has-[:checked]:border-[#486b00]">
+                                <input type="radio" name="payment-method" value="card" checked class="accent-[#486b00]">
+                                <span>Credit or debit card</span>
+                            </label>
+                            <label class="flex cursor-pointer items-center gap-3 rounded-sm border border-[#cbd1cb] bg-white p-4 text-sm font-semibold has-[:checked]:border-[#486b00] has-[:checked]:bg-[#f5f8ef]">
+                                <input type="radio" name="payment-method" value="apple-pay" class="accent-[#486b00]">
+                                <span>Apple Pay</span>
+                            </label>
+                            <label class="flex cursor-pointer items-center gap-3 rounded-sm border border-[#cbd1cb] bg-white p-4 text-sm font-semibold has-[:checked]:border-[#486b00] has-[:checked]:bg-[#f5f8ef]">
+                                <input type="radio" name="payment-method" value="paypal" class="accent-[#486b00]">
+                                <span>PayPal</span>
+                            </label>
+                            <label class="flex cursor-pointer items-center gap-3 rounded-sm border border-[#cbd1cb] bg-white p-4 text-sm font-semibold has-[:checked]:border-[#486b00] has-[:checked]:bg-[#f5f8ef]">
+                                <input type="radio" name="payment-method" value="affirm" class="accent-[#486b00]">
+                                <span>Affirm</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                        <label class="text-xs font-semibold sm:col-span-2">Card number
+                            <input inputmode="numeric" autocomplete="cc-number" name="card-number" placeholder="1234  5678  9012  3456" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold sm:col-span-2">Name on card
+                            <input autocomplete="cc-name" name="card-name" placeholder="Name as it appears on your card" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold">Expiration date
+                            <input inputmode="numeric" autocomplete="cc-exp" name="expiration" placeholder="MM / YY" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                        <label class="text-xs font-semibold">Security code
+                            <input inputmode="numeric" autocomplete="cc-csc" name="security-code" placeholder="CVC" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                        </label>
+                    </div>
+                </section>
+
+                <button type="submit" class="w-full rounded-sm bg-[#486b00] px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#385300] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#486b00]">Place order</button>
+                <p class="-mt-6 text-center text-xs leading-5 text-[#777d79]">By placing your order, you agree to our <a href="#" class="underline underline-offset-2 hover:text-[#486b00]">Terms of Service</a> and <a href="#" class="underline underline-offset-2 hover:text-[#486b00]">Privacy Policy</a>.</p>
+            </form>
+
+            <aside aria-labelledby="summary-heading" class="h-fit border border-[#e2e7e3] bg-white p-5 sm:p-7">
+                <h2 id="summary-heading" class="text-lg font-semibold">Order summary</h2>
+                <div class="mt-6 flex gap-4 border-b border-[#e2e7e3] pb-6">
+                    <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=240&q=80" alt="Camera drone in flight" class="h-24 w-28 shrink-0 object-cover">
+                    <div class="min-w-0 flex-1">
+                        <h3 class="font-['EB_Garamond',serif] text-xl font-semibold leading-tight">DJI Mini 4 Pro</h3>
+                        <p class="mt-1 text-xs leading-5 text-[#777d79]">Fly More Combo · Gray</p>
+                        <p class="mt-2 text-xs text-[#777d79]">Qty 1</p>
+                    </div>
+                    <p class="text-sm font-semibold">$1,099.00</p>
+                </div>
+                <div class="space-y-3 border-b border-[#e2e7e3] py-5 text-sm">
+                    <div class="flex justify-between gap-4"><span class="text-[#777d79]">Subtotal</span><span>$1,099.00</span></div>
+                    <div class="flex justify-between gap-4"><span class="text-[#777d79]">Shipping</span><span class="font-medium text-[#486b00]">Free</span></div>
+                    <div class="flex justify-between gap-4"><span class="text-[#777d79]">Estimated tax</span><span>Calculated at next step</span></div>
+                </div>
+                <div class="flex justify-between gap-4 pt-5 text-base font-semibold"><span>Total</span><span>$1,099.00</span></div>
+                <p class="mt-2 text-right text-xs text-[#777d79]">USD</p>
+                <div class="mt-6 border-t border-[#e2e7e3] pt-5">
+                    <p class="text-xs leading-5 text-[#777d79]">Need a hand? <a href="../support/index.html" class="font-semibold text-[#486b00] underline underline-offset-2">Contact support</a></p>
+                </div>
+            </aside>
+        </div>
+    </main>
 </body>
 </html>
