@@ -1,6 +1,5 @@
-<!DOCTYPE html>
 <!-- Tells the browser to parse this document using modern HTML rules. -->
-<html lang="en">
+<html lang="en" class="scroll-smooth [scroll-padding-top:100px] motion-reduce:scroll-auto">
 <head>
   <!-- Selects UTF-8 so the page can display common international characters. -->
   <meta charset="UTF-8" />
@@ -66,1207 +65,34 @@
   }
   </script>
 
-  <style>
-    /* =========================
-       1. DESIGN SYSTEM
-    ========================= */
-
-    /* Defines reusable site-wide colors, sizes, fonts, and shadow values. */
-    :root {
-      /* Brand tokens from the project style guide. */
-      --color-text: #060c13;
-      --color-background: #f9fbfe;
-      --color-primary: #486b00;
-      --color-secondary: #343837;
-      --color-accent: #420303;
-      /* Main page background color. */
-      --bg: var(--color-background);
-      /* Light background for controls and secondary surfaces. */
-      --surface: #f4f6f7;
-      /* Dark background used for contrast areas such as the footer. */
-      --surface-dark: var(--color-secondary);
-      /* Default foreground text color. */
-      --text: var(--color-text);
-      /* Lower-emphasis text color. */
-      --muted: #68727d;
-      /* Brand accent color used for highlights and primary controls. */
-      --accent: var(--color-primary);
-      /* Standard divider and control border color. */
-      --border: #e3e7eb;
-      /* Standard corner rounding for cards and framed elements. */
-      --radius: 8px;
-      /* Maximum width used by centered content containers. */
-      --container: 1240px;
-      /* Font family used for prominent headings. */
-      --font-heading: "EB Garamond", serif;
-      /* Font family used for normal interface and paragraph text. */
-      --font-body: "Montserrat", sans-serif;
-      /* Shared soft shadow used to raise elements above their background. */
-      --shadow: 0 12px 35px rgba(15, 25, 35, 0.08);
-    }
-
-    /* Makes declared widths include padding and borders throughout the page. */
-    *,
-    *::before,
-    *::after {
-      /* Prevents padding and borders from unexpectedly increasing element size. */
-      box-sizing: border-box;
-    }
-
-    /* Applies scrolling behavior and anchor spacing to the whole document. */
-    html {
-      /* Animates jumps to in-page links instead of moving instantly. */
-      scroll-behavior: smooth;
-      /* Leaves room above anchored content for the sticky header. */
-      scroll-padding-top: 100px;
-    }
-
-    /* Sets the page-wide baseline layout and typography. */
-    body {
-      /* Removes the browser's default outer page spacing. */
-      margin: 0;
-      /* Uses the shared page background color. */
-      background: var(--bg);
-      /* Uses the shared default text color. */
-      color: var(--text);
-      /* Sets the main text font family. */
-      font-family: var(--font-body);
-      /* Sets comfortable default spacing between lines of text. */
-      line-height: 1.6;
-      /* Smooths font rendering in WebKit-based browsers. */
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* Keeps controls in the same typeface as the rest of the page. */
-    body,
-    button,
-    input {
-      /* Overrides browser-specific default control fonts. */
-      font-family: var(--font-body);
-    }
-
-    /* Makes images responsive and prevents inline-image baseline gaps. */
-    img {
-      /* Displays images as blocks, removing inline baseline whitespace. */
-      display: block;
-      /* Prevents an image from exceeding the width of its parent. */
-      max-width: 100%;
-    }
-
-    /* Gives links the surrounding text color and removes default underlines. */
-    a {
-      /* Inherits the color from the link's surrounding context. */
-      color: inherit;
-      /* Removes the browser's default underline. */
-      text-decoration: none;
-    }
-
-    /* Makes controls inherit the surrounding text size and font settings. */
-    button,
-    input {
-      /* Copies the current font shorthand into form controls. */
-      font: inherit;
-    }
-
-    /* Suppresses the mobile tap flash on interactive controls. */
-    button,
-    a,
-    input {
-      /* Makes taps visually consistent across WebKit mobile browsers. */
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Shows a clear keyboard focus ring for keyboard and switch users. */
-    button:focus-visible,
-    a:focus-visible,
-    input:focus-visible {
-      /* Draws the visible focus indicator. */
-      outline: 3px solid var(--color-primary);
-      /* Separates the focus ring from the focused control. */
-      outline-offset: 4px;
-    }
-
-    /* Shows a hand cursor wherever a button can be activated. */
-    button {
-      cursor: pointer;
-    }
-
-    /* Centers content and caps its width while retaining side gutters. */
-    .container {
-      width: min(var(--container), calc(100% - 48px));
-      margin-inline: auto;
-    }
-
-    /* Gives standard content sections consistent vertical spacing. */
-    .section {
-      padding-block: 88px;
-    }
-
-    /* Styles the small uppercase label used above section headings. */
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    /* Sets the size, font, and line spacing of section titles. */
-    .section-heading {
-      margin: 0;
-      font-family: var(--font-heading);
-      font-size: clamp(1.8rem, 4vw, 2.7rem);
-      font-weight: 600;
-      letter-spacing: -0.055em;
-      line-height: 1.15;
-    }
-
-    /* Adds subdued spacing and color to section introductory text. */
-    .section-description {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    /* Moves the accessibility skip link off-screen until it receives focus. */
-    .skip-link {
-      position: absolute;
-      z-index: 1000;
-      top: -100px;
-      left: 16px;
-      padding: 12px 16px;
-      background: white;
-      color: black;
-    }
-
-    /* Brings the skip link into view when keyboard users focus it. */
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    /* =========================
-       2. NAVIGATION
-    ========================= */
-
-    /* Keeps the header at the top while scrolling and separates it from content. */
-    .site-header {
-      position: sticky;
-      z-index: 100;
-      top: 0;
-      background: rgba(255, 255, 255, 0.96);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px);
-    }
-
-    /* Lays out the brand, navigation, and action controls in one row. */
-    .navbar {
-      display: flex;
-      min-height: 82px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    /* Keeps the brand mark and wordmark aligned without shrinking the logo. */
-    .brand {
-      display: inline-flex;
-      flex-shrink: 0;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-heading);
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.08em;
-    }
-
-    /* Centers the letter inside the brand's square background. */
-    .brand-mark {
-      display: grid;
-      width: 36px;
-      height: 36px;
-      place-items: center;
-      border-radius: 11px;
-      background: var(--surface-dark);
-      color: var(--accent);
-      font-size: 1.2rem;
-      letter-spacing: 0;
-    }
-
-    /* Places desktop navigation links in a horizontal row. */
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    /* Gives navigation and account links consistent typography and color. */
-    .desktop-nav a,
-    .account-button {
-      color: #424c56;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-
-    /* Changes navigation link color on hover to signal interactivity. */
-    .desktop-nav a:hover,
-    .account-button:hover {
-      color: var(--color-primary);
-    }
-
-    /* Groups search, account, and shopping bag controls. */
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    /* Draws the rounded search field and arranges its icon and input. */
-    .search-form {
-      display: flex;
-      width: clamp(160px, 19vw, 245px);
-      min-height: 42px;
-      align-items: center;
-      gap: 8px;
-      padding: 0 12px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--surface);
-    }
-
-    /* Prevents the search icon from shrinking and tones it down. */
-    .search-form svg {
-      flex-shrink: 0;
-      color: var(--muted);
-    }
-
-    /* Lets the search text use remaining width without overflowing. */
-    .search-form input {
-      width: 100%;
-      min-width: 0;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-      font-size: 0.82rem;
-    }
-
-    /* Avoids drawing a second focus ring inside the styled search field. */
-    .search-form input:focus-visible {
-      outline: none;
-    }
-
-    /* Establishes the positioning anchor for the account dropdown. */
-    .account-wrapper {
-      position: relative;
-    }
-
-    /* Styles the account menu's clickable summary row. */
-    .account-button {
-      display: flex;
-      min-height: 42px;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 0;
-      border: 0;
-      background: transparent;
-    }
-
-    /* Positions the account dropdown below its summary control. */
-    .account-menu {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      z-index: 120;
-      width: 190px;
-      padding: 8px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: white;
-      box-shadow: var(--shadow);
-    }
-
-    /* Ensures the HTML hidden state removes the dropdown from layout. */
-    .account-menu[hidden] {
-      display: none;
-    }
-
-    /* Makes each account-menu link a full-width, padded row. */
-    .account-menu a {
-      display: block;
-      padding: 11px 12px;
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 0.88rem;
-    }
-
-    /* Highlights an account-menu row while the pointer is over it. */
-    .account-menu a:hover {
-      background: var(--surface);
-    }
-
-    /* Defines the mobile menu control, hidden until the small-screen layout. */
-    .menu-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      place-items: center;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: white;
-      color: var(--text);
-    }
-
-    /* Adds spacing and a divider to the expandable mobile navigation. */
-    .mobile-nav {
-      padding: 8px 0 20px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* Hides mobile navigation when its HTML hidden state is set. */
-    .mobile-nav[hidden] {
-      display: none;
-    }
-
-    /* Makes mobile navigation links easy to tap on separate rows. */
-    .mobile-nav a {
-      display: block;
-      padding: 12px 0;
-      font-weight: 600;
-    }
-
-    /* Keeps the mobile search hidden until the mobile breakpoint. */
-    .mobile-search {
-      display: none;
-      margin-top: 12px;
-    }
-
-    /* =========================
-       3. HERO CAMPAIGN
-    ========================= */
-
-    /* Creates the large, dark, vertically centered hero banner. */
-    .hero {
-      position: relative;
-      display: flex;
-      min-height: 590px;
-      align-items: center;
-      overflow: hidden;
-      background: #111a20;
-      color: white;
-    }
-
-    /* Stretches and crops the hero image to fill the banner. */
-    .hero-background {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 52%;
-    }
-
-    /* Adds a dark gradient over the hero image to keep text readable. */
-    .hero::after {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          90deg,
-          rgba(9, 15, 20, 0.88) 0%,
-          rgba(9, 15, 20, 0.60) 45%,
-          rgba(9, 15, 20, 0.12) 100%
-        );
-      content: "";
-    }
-
-    /* Places the hero copy above the overlay and aligns it to the page grid. */
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      width: min(var(--container), calc(100% - 48px));
-      margin-inline: auto;
-      padding-block: 90px;
-    }
-
-    /* Styles the small accent-colored label above the main headline. */
-    .hero-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 24px;
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    /* Draws the short decorative rule before the hero label. */
-    .hero-label::before {
-      width: 24px;
-      height: 2px;
-      background: var(--accent);
-      content: "";
-    }
-
-    /* Sets a large responsive display style for the main hero headline. */
-    .hero h1 {
-      max-width: 700px;
-      margin: 0;
-      font-family: var(--font-heading);
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 600;
-      letter-spacing: -0.075em;
-      line-height: 0.99;
-    }
-
-    /* Colors the emphasized word in the hero headline. */
-    .hero h1 span {
-      color: var(--accent);
-    }
-
-    /* Limits and softens the supporting hero paragraph. */
-    .hero-description {
-      max-width: 510px;
-      margin: 24px 0 32px;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: clamp(1rem, 1.8vw, 1.12rem);
-      line-height: 1.8;
-    }
-
-    /* Lays out hero calls to action and allows them to wrap. */
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    /* Provides a shared size, shape, and hover transition for pill buttons. */
-    .button {
-      display: inline-flex;
-      min-height: 48px;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px 22px;
-      border: 1px solid transparent;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-    }
-
-    /* Lifts buttons slightly on hover to show that they are interactive. */
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Applies the brand accent to the main action button. */
-    .button-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    /* Uses the style guide's secondary color while the primary button is hovered. */
-    .button-primary:hover {
-      background: var(--color-secondary);
-      color: white;
-    }
-
-    /* Styles the secondary action as a subtle outlined button. */
-    .button-secondary {
-      border-color: rgba(255, 255, 255, 0.45);
-      background: rgba(255, 255, 255, 0.05);
-      color: white;
-    }
-
-    /* Makes the secondary button background more visible on hover. */
-    .button-secondary:hover {
-      background: rgba(255, 255, 255, 0.14);
-    }
-
-    /* =========================
-       4. FEATURE STRIP
-    ========================= */
-
-    /* Arranges the three brand-benefit items in equal-width columns. */
-    .feature-strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-      padding-block: 30px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* Centers each icon and its text side by side. */
-    .feature {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 13px;
-    }
-
-    /* Creates a fixed-size square that centers each benefit icon. */
-    .feature-icon {
-      display: grid;
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
-      place-items: center;
-      border-radius: 14px;
-      background: #eef5e8;
-      color: var(--color-primary);
-    }
-
-    /* Displays the short benefit title on its own line. */
-    .feature strong {
-      display: block;
-      font-size: 0.9rem;
-    }
-
-    /* Styles the smaller explanatory text below a benefit title. */
-    .feature p {
-      margin: 2px 0 0;
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    /* =========================
-       5. PRODUCT SECTIONS
-    ========================= */
-
-    /* Clips any product content that extends beyond the section width. */
-    .products-section {
-      overflow: hidden;
-    }
-
-    /* Alternates product section backgrounds for visual separation. */
-    .products-section:nth-of-type(even) {
-      background: #fafbfc;
-    }
-
-    /* Places each product section heading beside its carousel controls. */
-    .section-top {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 32px;
-    }
-
-    /* Keeps the carousel's previous and next buttons together. */
-    .carousel-controls {
-      display: flex;
-      flex-shrink: 0;
-      gap: 8px;
-    }
-
-    /* Draws a circular, centered control for horizontal carousel scrolling. */
-    .carousel-button {
-      display: grid;
-      width: 44px;
-      height: 44px;
-      place-items: center;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      background: white;
-      color: var(--text);
-      transition: background 0.2s ease;
-    }
-
-    /* Uses the accent color to indicate a hovered carousel control. */
-    .carousel-button:hover {
-      background: var(--accent);
-    }
-
-    /* Dims disabled carousel controls and indicates they cannot be clicked. */
-    .carousel-button:disabled {
-      cursor: not-allowed;
-      opacity: 0.35;
-    }
-
-    /* Creates a horizontally scrollable row that snaps to product cards. */
-    .product-track {
-      display: grid;
-      grid-auto-columns: calc((100% - 60px) / 4);
-      grid-auto-flow: column;
-      gap: 20px;
-      overflow-x: auto;
-      overscroll-behavior-inline: contain;
-      padding: 2px 2px 20px;
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: thin;
-      scrollbar-color: #cbd3da transparent;
-    }
-
-    /* Frames an individual product and animates it when hovered. */
-    .product-card {
-      min-width: 0;
-      overflow: hidden;
-      border: 1px solid #edf0f2;
-      border-radius: var(--radius);
-      background: white;
-      scroll-snap-align: start;
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-    }
-
-    /* Raises the product card and adds a shadow while it is hovered. */
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow);
-    }
-
-    /* Crops product images to a consistent aspect ratio. */
-    .product-image-wrap {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 1 / 0.91;
-      background: var(--surface);
-    }
-
-    /* Fills the image frame and smoothly zooms on card hover. */
-    .product-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    /* Slightly enlarges the product image when its card is hovered. */
-    .product-card:hover .product-image {
-      transform: scale(1.045);
-    }
-
-    /* Places a compact label over the top-left of a product image. */
-    .product-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border-bottom: 2px solid var(--color-accent);
-      background: white;
-      color: var(--text);
-      font-size: 0.7rem;
-      font-weight: 700;
-    }
-
-    /* Adds interior spacing around a product's text and price. */
-    .product-info {
-      padding: 18px;
-    }
-
-    /* Styles the uppercase product category label. */
-    .product-category {
-      margin: 0 0 7px;
-      color: var(--muted);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* Styles the product name as the card's prominent heading. */
-    .product-name {
-      margin: 0;
-      font-family: var(--font-heading);
-      font-size: 1.08rem;
-      font-weight: 600;
-      letter-spacing: -0.035em;
-      line-height: 1.4;
-    }
-
-    /* Reserves room for the product description to align card footers. */
-    .product-description {
-      min-height: 42px;
-      margin: 8px 0 16px;
-      color: var(--muted);
-      font-size: 0.82rem;
-      line-height: 1.6;
-    }
-
-    /* Aligns the product price and product note along a divider. */
-    .product-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* Uses the heading font to emphasize the product price. */
-    .product-price {
-      font-family: var(--font-heading);
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    /* Styles the small note displayed beside each product price. */
-    .product-note {
-      color: var(--muted);
-      font-size: 0.72rem;
-    }
-
-    /* Adds space before the centered link beneath a product carousel. */
-    .section-bottom {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    /* Styles a text-based link with a bottom rule and optional icon. */
-    .text-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 0;
-      border-bottom: 1px solid currentColor;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    /* =========================
-       6. BRAND CAMPAIGN BANNER
-    ========================= */
-
-    /* Separates the secondary brand campaign from nearby page sections. */
-    .campaign {
-      padding-block: 20px 88px;
-    }
-
-    /* Creates a clipped, horizontally arranged image campaign panel. */
-    .campaign-card {
-      position: relative;
-      display: flex;
-      min-height: 320px;
-      align-items: center;
-      overflow: hidden;
-      border-radius: 24px;
-      background: #121c22;
-      color: white;
-    }
-
-    /* Makes the campaign image cover the full background of its panel. */
-    .campaign-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Adds a gradient overlay so campaign text remains readable on the image. */
-    .campaign-card::after {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(9, 15, 20, 0.88),
-        rgba(9, 15, 20, 0.28)
-      );
-      content: "";
-    }
-
-    /* Places and constrains the campaign text above its image overlay. */
-    .campaign-content {
-      position: relative;
-      z-index: 1;
-      max-width: 620px;
-      padding: clamp(28px, 6vw, 64px);
-    }
-
-    /* Styles the campaign headline in the display font. */
-    .campaign-content h2 {
-      margin: 0;
-      font-family: var(--font-heading);
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      letter-spacing: -0.06em;
-      line-height: 1.1;
-    }
-
-    /* Limits the campaign paragraph width and softens its text color. */
-    .campaign-content p {
-      max-width: 440px;
-      margin: 16px 0 24px;
-      color: rgba(255, 255, 255, 0.78);
-    }
-
-    /* =========================
-       7. FOOTER
-    ========================= */
-
-    /* Gives the footer a dark background with contrasting light text. */
-    .site-footer {
-      background: var(--surface-dark);
-      color: white;
-    }
-
-    /* Places the brand and footer link groups into four desktop columns. */
-    .footer-main {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-block: 68px;
-    }
-
-    /* Constrains and softens the brand summary below the footer logo. */
-    .footer-brand-description {
-      max-width: 280px;
-      margin: 16px 0 0;
-      color: #aab4bd;
-      font-size: 0.88rem;
-      line-height: 1.8;
-    }
-
-    /* Styles the small uppercase heading above each footer group. */
-    .footer-heading {
-      margin: 0 0 20px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    /* Removes default list styling and spaces footer links vertically. */
-    .footer-links {
-      display: grid;
-      gap: 12px;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    /* Gives footer links a subdued default color and a color transition. */
-    .footer-links a {
-      color: #aab4bd;
-      font-size: 0.87rem;
-      transition: color 0.2s ease;
-    }
-
-    /* Highlights a footer link on hover using the brand accent. */
-    .footer-links a:hover {
-      color: var(--accent);
-    }
-
-    /* Stacks contact details with consistent spacing and muted color. */
-    .footer-contact {
-      display: grid;
-      gap: 12px;
-      color: #aab4bd;
-      font-size: 0.87rem;
-    }
-
-    /* Highlights contact links while the pointer is over them. */
-    .footer-contact a:hover {
-      color: var(--accent);
-    }
-
-    /* Separates the copyright row and aligns its contents across the footer. */
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding-block: 22px;
-      border-top: 1px solid #2c363e;
-      color: #aab4bd;
-      font-size: 0.78rem;
-    }
-
-    /* Removes default paragraph margins from the footer's bottom row. */
-    .footer-bottom p {
-      margin: 0;
-    }
-
-    /* Highlights any link in the footer's bottom row on hover. */
-    .footer-bottom a:hover {
-      color: var(--accent);
-    }
-
-    /* =========================
-       8. RESPONSIVE BREAKPOINTS
-    ========================= */
-
-    /* Gives the hero extra height on especially wide desktop screens. */
-    @media (min-width: 1440px) {
-      .hero {
-        min-height: 660px;
-      }
-    }
-
-    /* Adjusts navigation, product columns, and footer for medium screens. */
-    @media (max-width: 1100px) {
-      .desktop-nav {
-        gap: 16px;
-      }
-
-      .navbar {
-        gap: 16px;
-      }
-
-      .nav-actions {
-        gap: 12px;
-      }
-
-      .product-track {
-        grid-auto-columns: calc((100% - 40px) / 3);
-      }
-
-      .footer-main {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    /* Switches to the mobile menu and two-column product layout on tablets. */
-    @media (max-width: 820px) {
-      .desktop-nav,
-      .desktop-search {
-        display: none;
-      }
-
-      .navbar {
-        min-height: 72px;
-      }
-
-      .menu-toggle {
-        display: grid;
-      }
-
-      .mobile-search {
-        display: block;
-      }
-
-      .mobile-search .search-form {
-        width: 100%;
-      }
-
-      .hero {
-        min-height: 540px;
-      }
-
-      .hero-content {
-        padding-block: 72px;
-      }
-
-      .feature-strip {
-        gap: 12px;
-      }
-
-      .feature {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .product-track {
-        grid-auto-columns: calc((100% - 20px) / 2);
-      }
-
-      .section {
-        padding-block: 68px;
-      }
-
-      .campaign {
-        padding-bottom: 68px;
-      }
-    }
-
-    /* Tightens spacing and stacks major content for narrow phone screens. */
-    @media (max-width: 560px) {
-      .container {
-        width: calc(100% - 32px);
-      }
-
-      .brand {
-        font-size: 1.55rem;
-      }
-
-      .brand-mark {
-        width: 32px;
-        height: 32px;
-      }
-
-      .nav-actions {
-        gap: 10px;
-      }
-
-      .account-button {
-        font-size: 0;
-      }
-
-      .account-button svg {
-        width: 23px;
-        height: 23px;
-      }
-
-      .hero {
-        min-height: 570px;
-        align-items: flex-end;
-      }
-
-      .hero-background {
-        object-position: 59% center;
-      }
-
-      .hero::after {
-        background: linear-gradient(
-          0deg,
-          rgba(9, 15, 20, 0.95) 0%,
-          rgba(9, 15, 20, 0.72) 55%,
-          rgba(9, 15, 20, 0.18) 100%
-        );
-      }
-
-      .hero-content {
-        width: calc(100% - 32px);
-        padding-block: 64px 52px;
-      }
-
-      .hero h1 {
-        font-size: clamp(3rem, 14vw, 4.5rem);
-      }
-
-      .hero-description {
-        font-size: 0.94rem;
-      }
-
-      .hero-actions .button {
-        width: 100%;
-      }
-
-      .feature-strip {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        padding-block: 26px;
-      }
-
-      .feature {
-        align-items: center;
-        flex-direction: row;
-        justify-content: flex-start;
-      }
-
-      .section {
-        padding-block: 54px;
-      }
-
-      .section-top {
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .section-description {
-        max-width: 270px;
-        font-size: 0.87rem;
-      }
-
-      .carousel-controls {
-        gap: 6px;
-      }
-
-      .carousel-button {
-        width: 38px;
-        height: 38px;
-      }
-
-      .product-track {
-        grid-auto-columns: 78%;
-        gap: 14px;
-        margin-right: -16px;
-        padding-right: 16px;
-      }
-
-      .product-info {
-        padding: 14px;
-      }
-
-      .product-name {
-        font-size: 1rem;
-      }
-
-      .product-description {
-        min-height: auto;
-      }
-
-      .campaign {
-        padding-block: 8px 54px;
-      }
-
-      .campaign-card {
-        min-height: 360px;
-        border-radius: 18px;
-      }
-
-      .campaign-card::after {
-        background: linear-gradient(
-          0deg,
-          rgba(9, 15, 20, 0.95),
-          rgba(9, 15, 20, 0.24)
-        );
-      }
-
-      .footer-main {
-        grid-template-columns: 1fr 1fr;
-        gap: 34px 20px;
-        padding-block: 48px;
-      }
-
-      .footer-brand-column {
-        grid-column: 1 / -1;
-      }
-
-      .footer-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 10px;
-      }
-    }
-
-    /* Reduces transitions and scrolling animation for users who request less motion. */
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
   <!-- Loads shared styles used by other pages in this storefront. -->
   <link rel="stylesheet" href="assets/shared.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="m-0 bg-[#f9fbfe] font-[Montserrat,sans-serif] leading-[1.6] text-[#060c13] antialiased [&_a]:text-inherit [&_a]:no-underline [&_button]:cursor-pointer [&_button]:font-[inherit] [&_button:focus-visible]:outline-[3px] [&_button:focus-visible]:outline-[#486b00] [&_button:focus-visible]:[outline-offset:4px] [&_a:focus-visible]:outline-[3px] [&_a:focus-visible]:outline-[#486b00] [&_a:focus-visible]:[outline-offset:4px] [&_input]:font-[inherit] [&_img]:block [&_img]:max-w-full]">
   <!-- Lets keyboard users jump past navigation directly to the page content. -->
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a class="absolute left-4 top-[-100px] z-[1000] bg-white px-4 py-3 text-black focus:top-4" href="#main-content">Skip to main content</a>
 
   <!-- =========================
        HEADER / REUSABLE NAVBAR
   ========================== -->
 
   <!-- Contains the sticky site header and its responsive navigation controls. -->
-  <header class="site-header">
-    <div class="container">
+  <header class="sticky top-0 z-[100] border-b border-[#e3e7eb] bg-[rgba(255,255,255,0.96)] backdrop-blur-2xl">
+    <div class="mx-auto w-[calc(100%-48px)] max-w-[1240px] max-[560px]:w-[calc(100%-32px)]">
       <!-- Identifies this group of links as the main site navigation. -->
-      <nav class="navbar" aria-label="Main navigation">
+      <nav class="flex min-h-[82px] items-center justify-between gap-6 max-[1100px]:gap-4 max-[820px]:min-h-[72px]" aria-label="Main navigation">
 
         <!-- Links the brand mark and wordmark back to the homepage. -->
-        <a class="brand" href="index.html" aria-label="Zephyr homepage">
+        <a class="inline-flex shrink-0 items-center gap-2.5 font-[EB_Garamond,serif] text-[1.75rem] font-bold tracking-[-0.08em] max-[560px]:text-[1.55rem]" href="index.html" aria-label="Zephyr homepage">
           <!-- Decorative Z mark; hidden from assistive technology because the link has a label. -->
-          <span class="brand-mark" aria-hidden="true">Z</span>
+          <span class="grid size-9 shrink-0 place-items-center rounded-[11px] bg-[#343837] text-[#486b00] text-[1.2rem] tracking-normal max-[560px]:size-8" aria-hidden="true">Z</span>
           <span>Zephyr</span>
         </a>
 
         <!-- Provides primary navigation links for wider screens. -->
-        <div class="desktop-nav">
+        <div class="flex items-center gap-7 max-[1100px]:gap-4 max-[820px]:hidden [&>a]:text-[0.88rem] [&>a]:font-semibold [&>a]:text-[#424c56] [&>a]:transition-colors [&>a]:duration-200 [&>a:hover]:text-[#486b00]">
           <a href="catalog/index.html">Explore</a>
           <a href="index.html#new-arrivals">New arrivals</a>
           <a href="index.html#best-sellers">Best sellers</a>
@@ -1274,10 +100,10 @@
         </div>
 
         <!-- Groups search, account, and shopping-bag actions. -->
-        <div class="nav-actions">
+        <div class="flex items-center gap-[18px] max-[1100px]:gap-3 max-[560px]:gap-2.5">
           <!-- Sends a search query to the catalog page; the disabled input marks this prototype feature unavailable. -->
           <form
-            class="search-form desktop-search"
+            class="flex min-h-[42px] w-[clamp(160px,19vw,245px)] items-center gap-2 rounded-full border border-[#e3e7eb] bg-[#f4f6f7] px-3 [&_svg]:shrink-0 [&_svg]:text-[#68727d] [&_input]:w-full [&_input]:min-w-0 [&_input]:border-0 [&_input]:bg-transparent [&_input]:text-[0.82rem] [&_input]:text-[#060c13] [&_input]:outline-none [&_input]:focus-visible:outline-none max-[820px]:hidden"
             role="search"
             action="catalog/index.html"
             method="get"
@@ -1301,9 +127,9 @@
           </form>
 
           <!-- Uses native disclosure behavior for the account dropdown. -->
-          <details class="account-wrapper">
+          <details class="relative">
             <summary
-              class="account-button"
+              class="flex min-h-[42px] items-center gap-2 border-0 bg-transparent py-2 text-[0.88rem] font-semibold text-[#424c56] transition-colors duration-200 hover:text-[#486b00] max-[560px]:text-[0px] [&_svg]:shrink-0 max-[560px]:[&_svg]:size-[23px]"
               aria-label="User account"
             >
               <!-- Shows the account silhouette icon. -->
@@ -1323,7 +149,7 @@
             </summary>
 
             <!-- Lists prototype account actions and a working contact link. -->
-            <div class="account-menu">
+            <div class="absolute right-0 top-[calc(100%+12px)] z-[120] w-[190px] rounded-[14px] border border-[#e3e7eb] bg-white p-2 shadow-[0_12px_35px_rgba(15,25,35,0.08)] [&>a]:block [&>a]:rounded-lg [&>a]:px-3 [&>a]:py-[11px] [&>a]:text-[0.88rem] [&>a]:text-[#060c13] [&>a:hover]:bg-[#f4f6f7]">
               <button type="button" disabled>Sign in (unavailable)</button>
               <button type="button" disabled>Create account (unavailable)</button>
               <button type="button" disabled>My orders (unavailable)</button>
@@ -1337,7 +163,7 @@
       </nav>
 
       <!-- Provides a native expandable navigation menu for narrow screens. -->
-      <details class="mobile-nav">
+      <details class="border-t border-[#e3e7eb] py-2 pb-5 [&>a]:block [&>a]:py-3 [&>a]:font-semibold">
         <summary>Menu</summary>
         <a href="index.html">Home</a>
         <a href="catalog/index.html">Explore</a>
@@ -1347,7 +173,7 @@
 
         <!-- Mobile equivalent of the desktop search form; also disabled in this prototype. -->
         <form
-          class="search-form mobile-search"
+          class="flex min-h-[42px] w-[clamp(160px,19vw,245px)] items-center gap-2 rounded-full border border-[#e3e7eb] bg-[#f4f6f7] px-3 [&_svg]:shrink-0 [&_svg]:text-[#68727d] [&_input]:w-full [&_input]:min-w-0 [&_input]:border-0 [&_input]:bg-transparent [&_input]:text-[0.82rem] [&_input]:text-[#060c13] [&_input]:outline-none [&_input]:focus-visible:outline-none mt-3 hidden max-[820px]:block max-[820px]:w-full"
           role="search"
           action="catalog/index.html"
           method="get"
@@ -1380,38 +206,38 @@
     ========================== -->
 
     <!-- Promotes the brand with a background image, headline, description, and actions. -->
-    <section class="hero" id="home" aria-labelledby="hero-title">
+    <section class="relative flex min-h-[590px] items-center overflow-hidden bg-[#111a20] text-white min-[1440px]:min-h-[660px] max-[820px]:min-h-[540px] max-[560px]:min-h-[570px] max-[560px]:items-end after:absolute after:inset-0 after:content-[""] after:bg-[linear-gradient(90deg,rgba(9,15,20,0.88)_0%,rgba(9,15,20,0.60)_45%,rgba(9,15,20,0.12)_100%)] max-[560px]:after:bg-[linear-gradient(0deg,rgba(9,15,20,0.95)_0%,rgba(9,15,20,0.72)_55%,rgba(9,15,20,0.18)_100%)] [&_h1]:m-0 [&_h1]:max-w-[700px] [&_h1]:font-[EB_Garamond,serif] [&_h1]:text-[clamp(3rem,7vw,6rem)] [&_h1]:font-semibold [&_h1]:leading-[0.99] [&_h1]:tracking-[-0.075em] [&_h1_span]:text-[#486b00]" id="home" aria-labelledby="hero-title">
       <!-- Decorative campaign photo with descriptive alternative text and high loading priority. -->
       <img
-        class="hero-background"
+        class="absolute inset-0 size-full object-cover [object-position:center_52%] max-[560px]:[object-position:59%_center]"
         src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=2000&q=85"
         alt="Drone ready to capture aerial landscapes"
         fetchpriority="high"
         decoding="async"
       />
 
-      <div class="hero-content">
+      <div class="relative z-[1] mx-auto w-[calc(100%-48px)] max-w-[1240px] py-[90px] max-[820px]:py-[72px] max-[560px]:w-[calc(100%-32px)] max-[560px]:py-[64px_52px]">
         <!-- Short introductory label above the main heading. -->
-        <p class="hero-label">Chase the View</p>
+        <p class="mb-6 inline-flex items-center gap-[9px] text-[0.78rem] font-bold uppercase tracking-[0.16em] text-[#486b00] before:h-0.5 before:w-6 before:bg-[#486b00] before:content-[""]">Chase the View</p>
 
         <!-- Main page heading for the Zephyr campaign. -->
-        <h1 id="hero-title">
+        <h1 id="hero-title" class="max-[560px]:text-[clamp(3rem,14vw,4.5rem)]">
           Zephyr
         </h1>
 
         <!-- Explains the brand offer beneath the headline. -->
-        <p class="hero-description">
+        <p class="my-6 mb-8 max-w-[510px] text-[clamp(1rem,1.8vw,1.12rem)] leading-[1.8] text-[rgba(255,255,255,0.78)] max-[560px]:text-[0.94rem]">
           Discover a fresh perspective with Zephyr.
         </p>
 
         <!-- Groups the primary catalog link and secondary in-page link. -->
-        <div class="hero-actions">
-            <a class="button button-primary" href="product/index.html?product=Zephyr">
+        <div class="flex flex-wrap gap-3 max-[560px]:[&>a]:w-full">
+            <a class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-transparent px-[22px] py-3 text-[0.9rem] font-bold transition-[transform,background] duration-200 hover:-translate-y-0.5 motion-reduce:transition-none bg-[#486b00] text-white hover:bg-[#343837] hover:text-white" href="product/index.html?product=Zephyr">
             Learn More
             <span aria-hidden="true">↗</span>
           </a>
 
-          <a class="button button-secondary" href="#about">
+          <a class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-transparent px-[22px] py-3 text-[0.9rem] font-bold transition-[transform,background] duration-200 hover:-translate-y-0.5 motion-reduce:transition-none border-[rgba(255,255,255,0.45)] bg-[rgba(255,255,255,0.05)] text-white hover:bg-[rgba(255,255,255,0.14)]" href="#about">
             Explore the catalog
           </a>
         </div>
@@ -1423,12 +249,12 @@
     ========================== -->
 
     <!-- Constrains the benefit strip to the shared page width. -->
-    <div class="container">
-      <section class="feature-strip" aria-label="Zephyr highlights">
+    <div class="mx-auto w-[calc(100%-48px)] max-w-[1240px] max-[560px]:w-[calc(100%-32px)]">
+      <section class="grid grid-cols-3 gap-5 border-b border-[#e3e7eb] py-[30px] max-[820px]:gap-3 max-[560px]:grid-cols-1 max-[560px]:gap-[22px] max-[560px]:py-[26px]" aria-label="Zephyr highlights">
 
         <!-- One benefit item: decorative icon, title, and supporting sentence. -->
-        <div class="feature">
-          <div class="feature-icon" aria-hidden="true">
+        <div class="flex items-center justify-center gap-[13px] max-[820px]:items-start max-[820px]:flex-col max-[560px]:items-center max-[560px]:flex-row max-[560px]:justify-start [&_strong]:block [&_strong]:text-[0.9rem] [&_p]:mt-0.5 [&_p]:mb-0 [&_p]:text-[0.78rem] [&_p]:text-[#68727d]">
+          <div class="grid size-11 shrink-0 place-items-center rounded-[14px] bg-[#eef5e8] text-[#486b00]" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="1.8">
               <path d="M12 3 4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7l-8-4Z"></path>
@@ -1442,8 +268,8 @@
         </div>
 
         <!-- Repeats the benefit pattern with an exploration-focused message. -->
-        <div class="feature">
-          <div class="feature-icon" aria-hidden="true">
+        <div class="flex items-center justify-center gap-[13px] max-[820px]:items-start max-[820px]:flex-col max-[560px]:items-center max-[560px]:flex-row max-[560px]:justify-start [&_strong]:block [&_strong]:text-[0.9rem] [&_p]:mt-0.5 [&_p]:mb-0 [&_p]:text-[0.78rem] [&_p]:text-[#68727d]">
+          <div class="grid size-11 shrink-0 place-items-center rounded-[14px] bg-[#eef5e8] text-[#486b00]" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="1.8">
               <circle cx="12" cy="12" r="9"></circle>
@@ -1457,8 +283,8 @@
         </div>
 
         <!-- Repeats the benefit pattern with an innovation-focused message. -->
-        <div class="feature">
-          <div class="feature-icon" aria-hidden="true">
+        <div class="flex items-center justify-center gap-[13px] max-[820px]:items-start max-[820px]:flex-col max-[560px]:items-center max-[560px]:flex-row max-[560px]:justify-start [&_strong]:block [&_strong]:text-[0.9rem] [&_p]:mt-0.5 [&_p]:mb-0 [&_p]:text-[0.78rem] [&_p]:text-[#68727d]">
+          <div class="grid size-11 shrink-0 place-items-center rounded-[14px] bg-[#eef5e8] text-[#486b00]" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24"
               fill="none" stroke="currentColor" stroke-width="1.8">
               <path d="M3 12h18"></path>
@@ -1480,27 +306,27 @@
 
     <!-- Shows products marked as new and links onward to the full catalog. -->
     <section
-      class="section products-section"
+      class="py-[88px] max-[820px]:py-[68px] max-[560px]:py-[54px] overflow-hidden even:bg-[#fafbfc]"
       id="new-arrivals"
       aria-labelledby="new-arrivals-title"
     >
-      <div class="container">
+      <div class="mx-auto w-[calc(100%-48px)] max-w-[1240px] max-[560px]:w-[calc(100%-32px)]">
 
-        <div class="section-top">
+        <div class="mb-8 flex items-end justify-between gap-6 max-[560px]:items-start max-[560px]:gap-3">
           <div>
-            <p class="eyebrow">Just landed</p>
-            <h2 class="section-heading" id="new-arrivals-title">
+            <p class="mt-0 mb-3 text-[0.76rem] font-bold uppercase tracking-[0.16em] text-[#68727d]">Just landed</p>
+            <h2 class="m-0 font-[EB_Garamond,serif] text-[clamp(1.8rem,4vw,2.7rem)] font-semibold leading-[1.15] tracking-[-0.055em]" id="new-arrivals-title">
               New arrivals
             </h2>
-            <p class="section-description">
+            <p class="mt-3 mb-0 text-[0.98rem] text-[#68727d] max-[560px]:max-w-[270px] max-[560px]:text-[0.87rem]">
               Fresh technology. New ways to explore.
             </p>
           </div>
 
           <!-- Optional previous/next controls; hidden until carousel behavior is enabled. -->
-          <div class="carousel-controls" hidden>
+          <div class="flex shrink-0 gap-2 max-[560px]:gap-1.5" hidden>
             <button
-              class="carousel-button"
+              class="grid size-11 place-items-center rounded-full border border-[#e3e7eb] bg-white text-[#060c13] transition-colors duration-200 hover:bg-[#486b00] disabled:cursor-not-allowed disabled:opacity-[0.35] max-[560px]:size-[38px] motion-reduce:transition-none"
               type="button"
               data-track="new-track"
               data-direction="-1"
@@ -1508,7 +334,7 @@
             >&#8592;</button>
 
             <button
-              class="carousel-button"
+              class="grid size-11 place-items-center rounded-full border border-[#e3e7eb] bg-white text-[#060c13] transition-colors duration-200 hover:bg-[#486b00] disabled:cursor-not-allowed disabled:opacity-[0.35] max-[560px]:size-[38px] motion-reduce:transition-none"
               type="button"
               data-track="new-track"
               data-direction="1"
@@ -1518,146 +344,146 @@
         </div>
 
         <!-- Horizontally scrollable list; its id connects it to the carousel buttons. -->
-        <div class="product-track" id="new-track" tabindex="0"
+        <div class="grid auto-cols-[calc((100%-60px)/4)] grid-flow-col gap-5 overflow-x-auto overscroll-x-contain p-[2px] pb-5 [scroll-behavior:smooth] [scroll-snap-type:x_mandatory] [scrollbar-width:thin] [scrollbar-color:#cbd3da_transparent] max-[1100px]:auto-cols-[calc((100%-40px)/3)] max-[820px]:auto-cols-[calc((100%-20px)/2)] max-[560px]:auto-cols-[78%] max-[560px]:gap-[14px] max-[560px]:mr-[-16px] max-[560px]:pr-4" id="new-track" tabindex="0"
           aria-label="New arrivals product list">
 
           <!-- Each product article groups its photo, badge, category, name, description, and price. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for Zephyr Neo"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">New</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">New</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Camera Drones</p>
-              <h3 class="product-name">Zephyr Neo</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Camera Drones</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Zephyr Neo</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 First flights, selfies, backyard and indoor use.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$199.00</span>
-                <span class="product-note">Featured</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$199.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Featured</span>
               </div>
-              <a class="text-link" href="product/index.html?product=Zephyr%20Neo">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Zephyr%20Neo">View details</a>
             </div>
           </article>
 
           <!-- A second new-arrival card for Zephyr. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for Zephyr"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">New</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">New</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Camera Drones</p>
-              <h3 class="product-name">Zephyr</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Camera Drones</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Zephyr</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 Landscape photography, travel films, and sunset shoots.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$999.00</span>
-                <span class="product-note">Featured</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$999.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Featured</span>
               </div>
-              <a class="text-link" href="product/index.html?product=Zephyr">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Zephyr">View details</a>
             </div>
           </article>
 
           <!-- A third new-arrival card for Action Cam 6. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1521405924368-64c5b84bec60?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for Action Cam 6"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">New</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">New</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Handheld</p>
-              <h3 class="product-name">Action Cam 6</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Handheld</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Action Cam 6</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 Biking, surfing, skiing, and other fast sports.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$379.00</span>
-                <span class="product-note">Featured</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$379.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Featured</span>
               </div>
-              <a class="text-link" href="product/index.html?product=Action%20Cam%206">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Action%20Cam%206">View details</a>
             </div>
           </article>
 
           <!-- A fourth new-arrival card for Orbit 360. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for Orbit 360"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">New</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">New</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Handheld</p>
-              <h3 class="product-name">Orbit 360</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Handheld</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Orbit 360</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 Virtual tours, travel recaps, and creative reframing.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$449.00</span>
-                <span class="product-note">Featured</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$449.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Featured</span>
               </div>
-              <a class="text-link" href="product/index.html?product=Orbit%20360">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Orbit%20360">View details</a>
             </div>
           </article>
 
-          <article class="product-card">
-            <div class="product-image-wrap">
-              <img class="product-image" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=700&q=80" alt="Representative image for PowerBox 300" loading="lazy" decoding="async" />
-              <span class="product-badge">New</span>
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
+              <img class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none" src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=700&q=80" alt="Representative image for PowerBox 300" loading="lazy" decoding="async" />
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">New</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Power</p>
-              <h3 class="product-name">PowerBox 300</h3>
-              <p class="product-description">Day trips, drone charging, and light camping.</p>
-              <div class="product-bottom"><span class="product-price">$299.00</span><span class="product-note">Featured</span></div>
-              <a class="text-link" href="product/index.html?product=PowerBox%20300">View details</a>
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Power</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">PowerBox 300</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">Day trips, drone charging, and light camping.</p>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]"><span class="font-[EB_Garamond,serif] text-base font-bold">$299.00</span><span class="text-[0.72rem] text-[#68727d]">Featured</span></div>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=PowerBox%20300">View details</a>
             </div>
           </article>
 
-          <article class="product-card">
-            <div class="product-image-wrap">
-              <img class="product-image" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=700&q=80" alt="Representative image for Clip Mic 3" loading="lazy" decoding="async" />
-              <span class="product-badge">New</span>
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
+              <img class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none" src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=700&q=80" alt="Representative image for Clip Mic 3" loading="lazy" decoding="async" />
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">New</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Accessories</p>
-              <h3 class="product-name">Clip Mic 3</h3>
-              <p class="product-description">Interviews, vlogs, and tutorials.</p>
-              <div class="product-bottom"><span class="product-price">$99.00</span><span class="product-note">Featured</span></div>
-              <a class="text-link" href="product/index.html?product=Clip%20Mic%203">View details</a>
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Accessories</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Clip Mic 3</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">Interviews, vlogs, and tutorials.</p>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]"><span class="font-[EB_Garamond,serif] text-base font-bold">$99.00</span><span class="text-[0.72rem] text-[#68727d]">Featured</span></div>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Clip%20Mic%203">View details</a>
             </div>
           </article>
 
         </div>
 
         <!-- Links visitors from the new-arrival preview to the full catalog. -->
-        <div class="section-bottom">
-          <a class="text-link" href="catalog/index.html">
+        <div class="mt-5 text-center">
+          <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="catalog/index.html">
             Explore the latest <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -1670,27 +496,27 @@
 
     <!-- Presents the same product-card pattern for popular products. -->
     <section
-      class="section products-section"
+      class="py-[88px] max-[820px]:py-[68px] max-[560px]:py-[54px] overflow-hidden even:bg-[#fafbfc]"
       id="best-sellers"
       aria-labelledby="best-sellers-title"
     >
-      <div class="container">
+      <div class="mx-auto w-[calc(100%-48px)] max-w-[1240px] max-[560px]:w-[calc(100%-32px)]">
 
-        <div class="section-top">
+        <div class="mb-8 flex items-end justify-between gap-6 max-[560px]:items-start max-[560px]:gap-3">
           <div>
-            <p class="eyebrow">Customer favorites</p>
-            <h2 class="section-heading" id="best-sellers-title">
+            <p class="mt-0 mb-3 text-[0.76rem] font-bold uppercase tracking-[0.16em] text-[#68727d]">Customer favorites</p>
+            <h2 class="m-0 font-[EB_Garamond,serif] text-[clamp(1.8rem,4vw,2.7rem)] font-semibold leading-[1.15] tracking-[-0.055em]" id="best-sellers-title">
               Best sellers
             </h2>
-            <p class="section-description">
+            <p class="mt-3 mb-0 text-[0.98rem] text-[#68727d] max-[560px]:max-w-[270px] max-[560px]:text-[0.87rem]">
               Popular picks for creators and explorers.
             </p>
           </div>
 
           <!-- Optional controls target the best-seller track and remain hidden here. -->
-          <div class="carousel-controls" hidden>
+          <div class="flex shrink-0 gap-2 max-[560px]:gap-1.5" hidden>
             <button
-              class="carousel-button"
+              class="grid size-11 place-items-center rounded-full border border-[#e3e7eb] bg-white text-[#060c13] transition-colors duration-200 hover:bg-[#486b00] disabled:cursor-not-allowed disabled:opacity-[0.35] max-[560px]:size-[38px] motion-reduce:transition-none"
               type="button"
               data-track="best-track"
               data-direction="-1"
@@ -1698,7 +524,7 @@
             >&#8592;</button>
 
             <button
-              class="carousel-button"
+              class="grid size-11 place-items-center rounded-full border border-[#e3e7eb] bg-white text-[#060c13] transition-colors duration-200 hover:bg-[#486b00] disabled:cursor-not-allowed disabled:opacity-[0.35] max-[560px]:size-[38px] motion-reduce:transition-none"
               type="button"
               data-track="best-track"
               data-direction="1"
@@ -1708,146 +534,146 @@
         </div>
 
         <!-- Scrollable best-seller list targeted by the section's control buttons. -->
-        <div class="product-track" id="best-track" tabindex="0"
+        <div class="grid auto-cols-[calc((100%-60px)/4)] grid-flow-col gap-5 overflow-x-auto overscroll-x-contain p-[2px] pb-5 [scroll-behavior:smooth] [scroll-snap-type:x_mandatory] [scrollbar-width:thin] [scrollbar-color:#cbd3da_transparent] max-[1100px]:auto-cols-[calc((100%-40px)/3)] max-[820px]:auto-cols-[calc((100%-20px)/2)] max-[560px]:auto-cols-[78%] max-[560px]:gap-[14px] max-[560px]:mr-[-16px] max-[560px]:pr-4" id="best-track" tabindex="0"
           aria-label="Best-selling product list">
 
           <!-- Each article repeats the product fields, with a popularity badge and bestseller note. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for Zephyr Mini"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">Popular</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">Popular</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Camera Drones</p>
-              <h3 class="product-name">Zephyr Mini</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Camera Drones</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Zephyr Mini</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 Travel, hiking, and beginner aerial photography.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$479.00</span>
-                <span class="product-note">Bestseller</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$479.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Bestseller</span>
               </div>
-              <a class="text-link" href="product/index.html?product=Zephyr%20Mini">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Zephyr%20Mini">View details</a>
             </div>
           </article>
 
           <!-- Second best-seller card, with its own product details and image alternative text. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for Pocket Cam 3"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">Popular</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">Popular</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Handheld</p>
-              <h3 class="product-name">Pocket Cam 3</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Handheld</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Pocket Cam 3</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 Vlogs, street video, and travel diaries.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$519.00</span>
-                <span class="product-note">Bestseller</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$519.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Bestseller</span>
               </div>
-              <a class="text-link" href="product/index.html?product=Pocket%20Cam%203">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Pocket%20Cam%203">View details</a>
             </div>
           </article>
 
           <!-- Third best-seller card, with its own product details and image alternative text. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1521405924368-64c5b84bec60?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for Phone Gimbal 8"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">Popular</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">Popular</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Handheld</p>
-              <h3 class="product-name">Phone Gimbal 8</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Handheld</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Phone Gimbal 8</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 Social videos, interviews, and walking shots.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$159.00</span>
-                <span class="product-note">Bestseller</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$159.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Bestseller</span>
               </div>
-              <a class="text-link" href="product/index.html?product=Phone%20Gimbal%208">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Phone%20Gimbal%208">View details</a>
             </div>
           </article>
 
           <!-- Fourth best-seller card, with its own product details and image alternative text. -->
-          <article class="product-card">
-            <div class="product-image-wrap">
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
               <img
-                class="product-image"
+                class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none"
                 src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=700&q=80"
                 alt="Representative image for PowerBox 1000"
                 loading="lazy"
                 decoding="async"
               />
-              <span class="product-badge">Popular</span>
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">Popular</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Power</p>
-              <h3 class="product-name">PowerBox 1000</h3>
-              <p class="product-description">
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Power</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">PowerBox 1000</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">
                 Long shoots, off-grid trips, and home backup.
               </p>
-              <div class="product-bottom">
-                <span class="product-price">$899.00</span>
-                <span class="product-note">Bestseller</span>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]">
+                <span class="font-[EB_Garamond,serif] text-base font-bold">$899.00</span>
+                <span class="text-[0.72rem] text-[#68727d]">Bestseller</span>
               </div>
-              <a class="text-link" href="product/index.html?product=PowerBox%201000">View details</a>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=PowerBox%201000">View details</a>
             </div>
           </article>
 
-          <article class="product-card">
-            <div class="product-image-wrap">
-              <img class="product-image" src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=700&q=80" alt="Representative image for Sky Case" loading="lazy" decoding="async" />
-              <span class="product-badge">Popular</span>
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
+              <img class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none" src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=700&q=80" alt="Representative image for Sky Case" loading="lazy" decoding="async" />
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">Popular</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Accessories</p>
-              <h3 class="product-name">Sky Case</h3>
-              <p class="product-description">Travel, hiking, and carry-on luggage.</p>
-              <div class="product-bottom"><span class="product-price">$59.00</span><span class="product-note">Bestseller</span></div>
-              <a class="text-link" href="product/index.html?product=Sky%20Case">View details</a>
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Accessories</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Sky Case</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">Travel, hiking, and carry-on luggage.</p>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]"><span class="font-[EB_Garamond,serif] text-base font-bold">$59.00</span><span class="text-[0.72rem] text-[#68727d]">Bestseller</span></div>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Sky%20Case">View details</a>
             </div>
           </article>
 
-          <article class="product-card">
-            <div class="product-image-wrap">
-              <img class="product-image" src="https://images.unsplash.com/photo-1521405924368-64c5b84bec60?auto=format&fit=crop&w=700&q=80" alt="Representative image for Prop Set" loading="lazy" decoding="async" />
-              <span class="product-badge">Popular</span>
+          <article class="group min-w-0 overflow-hidden rounded-lg border border-[#edf0f2] bg-white [scroll-snap-align:start] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-[5px] hover:shadow-[0_12px_35px_rgba(15,25,35,0.08)] motion-reduce:transition-none">
+            <div class="relative aspect-[1/0.91] overflow-hidden bg-[#f4f6f7]">
+              <img class="size-full object-cover transition-transform duration-300 group-hover:scale-[1.045] motion-reduce:transition-none" src="https://images.unsplash.com/photo-1521405924368-64c5b84bec60?auto=format&fit=crop&w=700&q=80" alt="Representative image for Prop Set" loading="lazy" decoding="async" />
+              <span class="absolute left-[14px] top-[14px] rounded-full border-b-2 border-[#420303] bg-white px-[10px] py-1.5 text-[0.7rem] font-bold text-[#060c13]">Popular</span>
             </div>
-            <div class="product-info">
-              <p class="product-category">Accessories</p>
-              <h3 class="product-name">Prop Set</h3>
-              <p class="product-description">Replacing worn or damaged propellers.</p>
-              <div class="product-bottom"><span class="product-price">$19.00</span><span class="product-note">Bestseller</span></div>
-              <a class="text-link" href="product/index.html?product=Prop%20Set">View details</a>
+            <div class="p-[18px] max-[560px]:p-[14px]">
+              <p class="mt-0 mb-[7px] text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#68727d]">Accessories</p>
+              <h3 class="m-0 font-[EB_Garamond,serif] text-[1.08rem] font-semibold leading-[1.4] tracking-[-0.035em] max-[560px]:text-base">Prop Set</h3>
+              <p class="my-2 mb-4 min-h-[42px] text-[0.82rem] leading-[1.6] text-[#68727d] max-[560px]:min-h-0">Replacing worn or damaged propellers.</p>
+              <div class="flex items-center justify-between gap-2 border-t border-[#e3e7eb] pt-[14px]"><span class="font-[EB_Garamond,serif] text-base font-bold">$19.00</span><span class="text-[0.72rem] text-[#68727d]">Bestseller</span></div>
+              <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="product/index.html?product=Prop%20Set">View details</a>
             </div>
           </article>
 
         </div>
 
         <!-- Links from the best-seller preview to the full catalog. -->
-        <div class="section-bottom">
-          <a class="text-link" href="catalog/index.html">
+        <div class="mt-5 text-center">
+          <a class="inline-flex items-center gap-2 border-b border-current py-2 text-[0.9rem] font-bold" href="catalog/index.html">
             Discover customer favorites
             <span aria-hidden="true">→</span>
           </a>
@@ -1860,13 +686,13 @@
     ========================== -->
 
     <!-- Shares the brand mission in a second image-led campaign panel. -->
-    <section class="campaign container" id="about"
+    <section class="pb-[88px] pt-5 max-[820px]:pb-[68px] max-[560px]:pb-[54px] max-[560px]:pt-2 mx-auto w-[calc(100%-48px)] max-w-[1240px] max-[560px]:w-[calc(100%-32px)]" id="about"
       aria-labelledby="campaign-title">
-      <div class="campaign-card">
+      <div class="relative flex min-h-80 items-center overflow-hidden rounded-3xl bg-[#121c22] text-white after:absolute after:inset-0 after:content-[""] after:bg-[linear-gradient(90deg,rgba(9,15,20,0.88),rgba(9,15,20,0.28))] max-[560px]:min-h-[360px] max-[560px]:rounded-[18px] max-[560px]:after:bg-[linear-gradient(0deg,rgba(9,15,20,0.95),rgba(9,15,20,0.24))]">
 
         <!-- Campaign image describing the brand's aerial technology theme. -->
         <img
-          class="campaign-image"
+          class="absolute inset-0 size-full object-cover"
           src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=1600&q=85"
           alt="Drone technology designed to open new creative possibilities"
           loading="lazy"
@@ -1874,8 +700,8 @@
         />
 
         <!-- Contains the brand label, mission headline, copy, and contact action. -->
-        <div class="campaign-content">
-          <p class="eyebrow" style="color: var(--accent);">
+        <div class="relative z-[1] max-w-[620px] p-[clamp(28px,6vw,64px)] [&_h2]:m-0 [&_h2]:font-[EB_Garamond,serif] [&_h2]:text-[clamp(2rem,4vw,3.5rem)] [&_h2]:leading-[1.1] [&_h2]:tracking-[-0.06em] [&_p]:my-4 [&_p]:mb-6 [&_p]:max-w-[440px] [&_p]:text-[rgba(255,255,255,0.78)]">
+          <p class="mt-0 mb-3 text-[0.76rem] font-bold uppercase tracking-[0.16em] text-[#68727d] !text-[#486b00]">
             Creator Season
           </p>
           <h2 id="campaign-title">
@@ -1884,7 +710,7 @@
           <p>
             Get ready for a new season of aerial creativity.
           </p>
-          <a class="button button-primary" href="catalog/index.html">
+          <a class="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-transparent px-[22px] py-3 text-[0.9rem] font-bold transition-[transform,background] duration-200 hover:-translate-y-0.5 motion-reduce:transition-none bg-[#486b00] text-white hover:bg-[#343837] hover:text-white" href="catalog/index.html">
             Shop Now
             <span aria-hidden="true">→</span>
           </a>
@@ -1900,19 +726,19 @@
   ========================== -->
 
   <!-- Groups brand details, category/legal links, contact details, and copyright. -->
-  <footer class="site-footer">
-    <div class="container">
+  <footer class="bg-[#343837] text-white">
+    <div class="mx-auto w-[calc(100%-48px)] max-w-[1240px] max-[560px]:w-[calc(100%-32px)]">
 
-      <div class="footer-main">
+      <div class="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-12 py-[68px] max-[1100px]:grid-cols-2 max-[560px]:gap-[34px_20px] max-[560px]:py-12">
 
         <!-- Provides the footer version of the logo and brand description. -->
-        <div class="footer-brand-column">
-          <a class="brand" href="index.html" aria-label="Zephyr homepage">
-            <span class="brand-mark" aria-hidden="true">Z</span>
+        <div class="max-[560px]:col-span-full">
+          <a class="inline-flex shrink-0 items-center gap-2.5 font-[EB_Garamond,serif] text-[1.75rem] font-bold tracking-[-0.08em] max-[560px]:text-[1.55rem]" href="index.html" aria-label="Zephyr homepage">
+            <span class="grid size-9 shrink-0 place-items-center rounded-[11px] bg-[#343837] text-[#486b00] text-[1.2rem] tracking-normal max-[560px]:size-8" aria-hidden="true">Z</span>
             <span>Zephyr</span>
           </a>
 
-          <p class="footer-brand-description">
+          <p class="mt-4 mb-0 max-w-[280px] text-[0.88rem] leading-[1.8] text-[#aab4bd]">
             A fresh perspective on aerial technology.
             Built around exploration, creative freedom, and innovation.
           </p>
@@ -1920,10 +746,10 @@
 
         <!-- Navigation list for product categories. -->
         <nav aria-labelledby="footer-categories">
-          <h2 class="footer-heading" id="footer-categories">
+          <h2 class="mt-0 mb-5 text-[0.82rem] font-bold uppercase tracking-[0.1em]" id="footer-categories">
             Categories
           </h2>
-          <ul class="footer-links">
+          <ul class="m-0 grid list-none gap-3 p-0 [&_a]:text-[0.87rem] [&_a]:text-[#aab4bd] [&_a]:transition-colors [&_a]:duration-200 [&_a:hover]:text-[#486b00]">
             <li><a href="catalog/index.html">Camera Drones</a></li>
             <li><a href="catalog/index.html">Handheld</a></li>
             <li><a href="catalog/index.html">Power</a></li>
@@ -1933,10 +759,10 @@
 
         <!-- Navigation list for legal disclosures and brand information. -->
         <nav aria-labelledby="footer-legal">
-          <h2 class="footer-heading" id="footer-legal">
+          <h2 class="mt-0 mb-5 text-[0.82rem] font-bold uppercase tracking-[0.1em]" id="footer-legal">
             Legal
           </h2>
-          <ul class="footer-links">
+          <ul class="m-0 grid list-none gap-3 p-0 [&_a]:text-[0.87rem] [&_a]:text-[#aab4bd] [&_a]:transition-colors [&_a]:duration-200 [&_a:hover]:text-[#486b00]">
             <li><details><summary>Terms and conditions</summary><p>Student prototype. No orders or payments are processed. All product information is fictional.</p></details></li>
             <li><details><summary>Privacy policy</summary><p>This static prototype has no account or payment processing. Images and fonts load from external providers.</p></details></li>
             <li><a href="index.html#about">About the brand</a></li>
@@ -1945,9 +771,9 @@
 
         <!-- Contact block; its id is the target of the page's contact links. -->
         <div id="footer-contact">
-          <h2 class="footer-heading">Contact</h2>
-          <div class="footer-contact">
-            <p style="margin: 0;">
+          <h2 class="mt-0 mb-5 text-[0.82rem] font-bold uppercase tracking-[0.1em]">Contact</h2>
+          <div class="grid gap-3 text-[0.87rem] text-[#aab4bd] [&_a:hover]:text-[#486b00]">
+            <p class="m-0">
               Have a question about Zephyr?
             </p>
             <!-- Replace with your team's official contact address -->
@@ -1962,7 +788,7 @@
       </div>
 
       <!-- Displays the copyright year and closing brand statement. -->
-      <div class="footer-bottom">
+      <div class="flex items-center justify-between gap-5 border-t border-[#2c363e] py-[22px] text-[0.78rem] text-[#aab4bd] [&_p]:m-0 [&_a:hover]:text-[#486b00] max-[560px]:items-start max-[560px]:flex-col max-[560px]:gap-2">
         <p>
           &copy; <span id="current-year">2026</span> Zephyr.
           All rights reserved.
