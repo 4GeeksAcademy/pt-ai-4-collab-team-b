@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f9fbfe">
-    <title>Checkout | DJI</title>
+    <title>Checkout | Zephyr</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <body class="bg-[#f9fbfe] font-['Montserrat',sans-serif] text-[#060c13] antialiased">
     <header class="border-b border-[#e2e7e3] bg-white">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-            <a href="../index.html" class="text-xl font-bold tracking-[0.18em]" aria-label="DJI home">DJI</a>
+            <a href="../index.html" class="text-xl font-bold tracking-[0.18em]" aria-label="Zephyr home">Zephyr</a>
             <a href="../cart/index.html" class="text-sm font-medium text-[#343837] hover:text-[#486b00]">Back to cart</a>
         </div>
     </header>
@@ -70,7 +70,59 @@
                             <input required autocomplete="address-level2" name="city" placeholder="City" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
                         </label>
                         <label class="text-xs font-semibold">State / Province *
-                            <input required autocomplete="address-level1" name="state" placeholder="State or province" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                            <select required autocomplete="address-level1" name="state" placeholder="State or province" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
+                            <option value="state" selected disabled>Select a state</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                            </select>
                         </label>
                         <label class="text-xs font-semibold">ZIP / Postal code *
                             <input required autocomplete="postal-code" name="postal-code" placeholder="ZIP or postal code" class="mt-2 w-full rounded-sm border border-[#cbd1cb] bg-white px-4 py-3 text-sm font-normal outline-none placeholder:text-[#969c98] focus:border-[#486b00]">
